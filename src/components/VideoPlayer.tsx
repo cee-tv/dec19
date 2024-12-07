@@ -10,9 +10,10 @@ interface VideoPlayerProps {
     keyId: string;
     key: string;
   };
+  onClose?: () => void;
 }
 
-const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
+const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<shaka.Player | null>(null);
   const hlsRef = useRef<Hls | null>(null);
@@ -113,14 +114,24 @@ const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
         controls
         autoPlay
       />
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white"
-        onClick={toggleFullscreen}
-      >
-        {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
-      </Button>
+      <div className="absolute top-4 right-4 flex gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-black/50 hover:bg-black/70 text-white"
+          onClick={onClose}
+        >
+          <X className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-black/50 hover:bg-black/70 text-white"
+          onClick={toggleFullscreen}
+        >
+          {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+        </Button>
+      </div>
     </div>
   );
 };

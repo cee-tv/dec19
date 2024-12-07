@@ -56,6 +56,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-8">ClearKey Channel Grid</h1>
         <div className="space-y-8">
           <div className="relative">
             <Input
@@ -82,6 +83,7 @@ const Index = () => {
           <VideoPlayer
             manifestUrl={selectedChannel.streamUrl}
             drmKey={selectedChannel.drmKey}
+            onClose={() => setSelectedChannel(null)}
           />
         </div>
       )}
