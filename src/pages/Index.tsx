@@ -50,27 +50,28 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">ClearKey Channel Grid</h1>
-        <div className="space-y-8">
-          <div className="relative">
-            <Input
-              type="search"
-              placeholder="Search channels..."
-              className="w-full"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-          
-          <ScrollArea className="h-[calc(100vh-200px)]">
-            <ChannelGrid
-              channels={filteredChannels}
-              onChannelSelect={handleChannelSelect}
-              selectedChannelId={selectedChannel?.id}
-            />
-          </ScrollArea>
+      <div className="container mx-auto px-4 py-8 space-y-6">
+        <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+          ClearKey Channel Grid
+        </h1>
+        
+        <div className="relative">
+          <Input
+            type="search"
+            placeholder="Search channels..."
+            className="w-full glass rounded-2xl h-12 px-6"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
+        
+        <ScrollArea className="h-[calc(100vh-200px)]">
+          <ChannelGrid
+            channels={filteredChannels}
+            onChannelSelect={handleChannelSelect}
+            selectedChannelId={selectedChannel?.id}
+          />
+        </ScrollArea>
       </div>
 
       {selectedChannel && (
