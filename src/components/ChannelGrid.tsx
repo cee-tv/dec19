@@ -16,26 +16,26 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
           key={channel.id}
           onClick={() => onChannelSelect(channel)}
           className={cn(
-            "group relative p-3 cursor-pointer transition-all duration-300 glass",
+            "group relative p-4 cursor-pointer transition-all duration-300 glass",
             "hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-2xl",
-            "flex items-center justify-center aspect-[4/3]",
             selectedChannelId === channel.id && "ring-2 ring-primary",
           )}
         >
-          <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-            <div className="w-full h-full flex items-center justify-center">
-              <img
-                src={channel.logo}
-                alt={`${channel.name} logo`}
-                className="w-full h-full object-contain p-2"
-                loading="lazy"
-              />
-            </div>
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-card-foreground truncate">
-                {channel.name}
-              </h3>
-            </div>
+          <div className="aspect-video mb-3 overflow-hidden rounded-xl bg-muted">
+            <img
+              src={channel.id === '1' ? 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d' : channel.logo}
+              alt={`${channel.name} logo`}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading="lazy"
+            />
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-sm font-medium text-card-foreground truncate">
+              {channel.name}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              Entertainment Group
+            </p>
           </div>
         </Card>
       ))}

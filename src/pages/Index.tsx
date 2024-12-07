@@ -3,6 +3,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import ChannelGrid from '../components/ChannelGrid';
 import { Input } from '../components/ui/input';
 import { ScrollArea } from '../components/ui/scroll-area';
+import { Tv } from 'lucide-react';
 
 export interface Channel {
   id: string;
@@ -19,7 +20,7 @@ export interface Channel {
 const channels: Channel[] = Array.from({ length: 90 }, (_, index) => ({
   id: String(index + 1),
   name: `Channel ${index + 1}`,
-  logo: 'https://placehold.co/400x300/png',
+  logo: '/placeholder.svg',
   streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
   drmKey: {
     keyId: '2615129ef2c846a9bbd43a641c7303ef',
@@ -27,11 +28,10 @@ const channels: Channel[] = Array.from({ length: 90 }, (_, index) => ({
   }
 }));
 
-// Add Cinema One as the last channel
 channels.push({
   id: '91',
   name: 'Cinema One',
-  logo: 'https://placehold.co/400x300/png',
+  logo: '/placeholder.svg',
   streamUrl: 'https://cinemaone-abscbn-ono.amagi.tv/index_3.m3u8'
 });
 
@@ -51,9 +51,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 space-y-6">
-        <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-          ClearKey Channel Grid
-        </h1>
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <Tv className="w-8 h-8 text-primary" />
+          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            ClearKey Channel Grid
+          </h1>
+        </div>
         
         <div className="relative">
           <Input
