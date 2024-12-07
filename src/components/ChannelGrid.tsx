@@ -16,22 +16,30 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
           key={channel.id}
           onClick={() => onChannelSelect(channel)}
           className={cn(
-            "group relative p-4 cursor-pointer transition-all duration-300 glass",
-            "hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-2xl",
+            "group relative p-0 cursor-pointer transition-all duration-300 glass overflow-hidden",
+            "hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-2xl h-[200px]",
             selectedChannelId === channel.id && "ring-2 ring-primary",
           )}
         >
-          <div className="aspect-video mb-3 overflow-hidden rounded-xl bg-muted">
+          <div className="absolute inset-0 w-full h-full">
             <img
               src={channel.logo}
               alt={`${channel.name} logo`}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              className="w-full h-full object-cover"
               loading="lazy"
             />
           </div>
-          <h3 className="text-sm font-medium text-card-foreground truncate">
-            {channel.name}
-          </h3>
+          
+          <div className={cn(
+            "absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm",
+            "transform transition-transform duration-300",
+            selectedChannelId === channel.id ? "translate-y-0" : "translate-y-full",
+            "group-hover:translate-y-0"
+          )}>
+            <h3 className="text-sm font-medium text-white p-3 text-center">
+              {channel.name}
+            </h3>
+          </div>
         </Card>
       ))}
     </div>
