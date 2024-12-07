@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import shaka from 'shaka-player/dist/shaka-player.ui';
+import * as shaka from 'shaka-player';
 import Hls from 'hls.js';
-import { Maximize2, Minimize2 } from 'lucide-react';
+import { Maximize2, Minimize2, X } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface VideoPlayerProps {
@@ -17,7 +17,7 @@ const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
   const playerRef = useRef<shaka.Player | null>(null);
   const hlsRef = useRef<Hls | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(true);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -82,6 +82,11 @@ const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
 
           await player.load(manifestUrl);
           console.log('The video has now been loaded!');
+          
+          // Request fullscreen after loading
+          if (containerRef.current) {
+            containerRef.current.requestFullscreen();
+          }
         }
       } catch (error) {
         console.error('Error loading video:', error);
@@ -101,7 +106,7 @@ const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
   }, [manifestUrl, drmKey]);
 
   return (
-    <div ref={containerRef} className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-full bg-black">
       <video
         ref={videoRef}
         className="w-full h-full"

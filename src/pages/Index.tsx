@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import VideoPlayer from '../components/VideoPlayer';
 import ChannelGrid from '../components/ChannelGrid';
 import { toast } from '../components/ui/use-toast';
-import { Button } from '../components/ui/button';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '../components/ui/drawer';
 import { Input } from '../components/ui/input';
 import { ScrollArea } from '../components/ui/scroll-area';
-import { X } from 'lucide-react';
 
 export interface Channel {
   id: string;
@@ -41,7 +38,6 @@ const channels: Channel[] = [
 
 const Index = () => {
   const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredChannels = channels.filter(channel =>
@@ -51,7 +47,6 @@ const Index = () => {
   const handleChannelSelect = (channel: Channel) => {
     console.log('Selected channel:', channel);
     setSelectedChannel(channel);
-    setIsDrawerOpen(true);
     toast({
       title: `Now playing: ${channel.name}`,
       duration: 2000,
@@ -82,28 +77,14 @@ const Index = () => {
         </div>
       </div>
 
-      <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-        <DrawerContent className="h-[90vh]">
-          <DrawerHeader className="flex justify-between items-center">
-            <DrawerTitle>{selectedChannel?.name}</DrawerTitle>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsDrawerOpen(false)}
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </DrawerHeader>
-          {selectedChannel && (
-            <div className="p-4">
-              <VideoPlayer
-                manifestUrl={selectedChannel.streamUrl}
-                drmKey={selectedChannel.drmKey}
-              />
-            </div>
-          )}
-        </DrawerContent>
-      </Drawer>
+      {selectedChannel && (
+        <div className="fixed inset-0 z-50 bg-black">
+          <VideoPlayer
+            manifestUrl={selectedChannel.streamUrl}
+            drmKey={selectedChannel.drmKey}
+          />
+        </div>
+      )}
     </div>
   );
 };
