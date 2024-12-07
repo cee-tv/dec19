@@ -1,5 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import shaka from 'shaka-player/dist/shaka-player.ui';
+import Hls from 'hls.js';
+import { Maximize2, Minimize2 } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface VideoPlayerProps {
   manifestUrl: string;
@@ -12,48 +15,74 @@ interface VideoPlayerProps {
 const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<shaka.Player | null>(null);
+  const hlsRef = useRef<Hls | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    if (!containerRef.current) return;
+    
+    if (!document.fullscreenElement) {
+      containerRef.current.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
 
   useEffect(() => {
     const initPlayer = async () => {
       if (!videoRef.current) return;
 
-      // Install built-in polyfills to patch browser incompatibilities
-      shaka.polyfill.installAll();
-
-      // Check if the browser supports the basic functionality
-      if (!shaka.Player.isBrowserSupported()) {
-        console.error('Browser not supported!');
-        return;
+      // Clean up existing instances
+      if (playerRef.current) {
+        await playerRef.current.destroy();
+      }
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
       }
 
       try {
-        if (playerRef.current) {
-          await playerRef.current.destroy();
-        }
+        // Handle HLS streams
+        if (manifestUrl.includes('.m3u8')) {
+          if (Hls.isSupported()) {
+            const hls = new Hls();
+            hlsRef.current = hls;
+            hls.loadSource(manifestUrl);
+            hls.attachMedia(videoRef.current);
+            console.log('HLS player initialized');
+          } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+            videoRef.current.src = manifestUrl;
+          }
+        } else {
+          // Handle DASH streams with Shaka Player
+          shaka.polyfill.installAll();
+          if (!shaka.Player.isBrowserSupported()) {
+            console.error('Browser not supported!');
+            return;
+          }
 
-        // Create a Player instance
-        const player = new shaka.Player(videoRef.current);
-        playerRef.current = player;
+          const player = new shaka.Player(videoRef.current);
+          playerRef.current = player;
 
-        // Attach player event listeners
-        player.addEventListener('error', (event) => {
-          console.error('Error code', event.detail.code, 'object', event.detail);
-        });
-
-        // Configure DRM if key is provided
-        if (drmKey) {
-          player.configure({
-            drm: {
-              clearKeys: {
-                [drmKey.keyId]: drmKey.key
-              }
-            }
+          player.addEventListener('error', (event) => {
+            console.error('Error code', event.detail.code, 'object', event.detail);
           });
-        }
 
-        // Load the manifest
-        await player.load(manifestUrl);
-        console.log('The video has now been loaded!');
+          if (drmKey) {
+            player.configure({
+              drm: {
+                clearKeys: {
+                  [drmKey.keyId]: drmKey.key
+                }
+              }
+            });
+          }
+
+          await player.load(manifestUrl);
+          console.log('The video has now been loaded!');
+        }
       } catch (error) {
         console.error('Error loading video:', error);
       }
@@ -65,17 +94,28 @@ const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
       if (playerRef.current) {
         playerRef.current.destroy();
       }
+      if (hlsRef.current) {
+        hlsRef.current.destroy();
+      }
     };
   }, [manifestUrl, drmKey]);
 
   return (
-    <div className="relative w-full aspect-video bg-black">
+    <div ref={containerRef} className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
       <video
         ref={videoRef}
         className="w-full h-full"
         controls
         autoPlay
       />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white"
+        onClick={toggleFullscreen}
+      >
+        {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+      </Button>
     </div>
   );
 };

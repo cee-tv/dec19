@@ -1,5 +1,6 @@
 import { Channel } from '../pages/Index';
 import { cn } from '../lib/utils';
+import { Card } from './ui/card';
 
 interface ChannelGridProps {
   channels: Channel[];
@@ -11,13 +12,12 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       {channels.map((channel) => (
-        <button
+        <Card
           key={channel.id}
           onClick={() => onChannelSelect(channel)}
           className={cn(
-            "group relative p-4 rounded-lg transition-all duration-300",
+            "group relative p-4 cursor-pointer transition-all duration-300",
             "hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary",
-            "bg-card hover:bg-card/90",
             selectedChannelId === channel.id && "ring-2 ring-primary",
           )}
         >
@@ -32,7 +32,7 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
           <h3 className="text-sm font-medium text-card-foreground truncate">
             {channel.name}
           </h3>
-        </button>
+        </Card>
       ))}
     </div>
   );
