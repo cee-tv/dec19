@@ -19,7 +19,7 @@ export interface Channel {
 const channels: Channel[] = Array.from({ length: 90 }, (_, index) => ({
   id: String(index + 1),
   name: `Channel ${index + 1}`,
-  logo: '/placeholder.svg',
+  logo: 'https://placehold.co/400x300/png',
   streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
   drmKey: {
     keyId: '2615129ef2c846a9bbd43a641c7303ef',
@@ -31,7 +31,7 @@ const channels: Channel[] = Array.from({ length: 90 }, (_, index) => ({
 channels.push({
   id: '91',
   name: 'Cinema One',
-  logo: '/placeholder.svg',
+  logo: 'https://placehold.co/400x300/png',
   streamUrl: 'https://cinemaone-abscbn-ono.amagi.tv/index_3.m3u8'
 });
 
