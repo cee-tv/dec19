@@ -16,24 +16,24 @@ export interface Channel {
   };
 }
 
-const channels: Channel[] = [
-  {
-    id: '1',
-    name: 'TV5',
-    logo: '/placeholder.svg',
-    streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
-    drmKey: {
-      keyId: '2615129ef2c846a9bbd43a641c7303ef',
-      key: '07c7f996b1734ea288641a68e1cfdc4d'
-    }
-  },
-  {
-    id: '2',
-    name: 'Cinema One',
-    logo: '/placeholder.svg',
-    streamUrl: 'https://cinemaone-abscbn-ono.amagi.tv/index_3.m3u8'
+const channels: Channel[] = Array.from({ length: 90 }, (_, index) => ({
+  id: String(index + 1),
+  name: `Channel ${index + 1}`,
+  logo: '/placeholder.svg',
+  streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
+  drmKey: {
+    keyId: '2615129ef2c846a9bbd43a641c7303ef',
+    key: '07c7f996b1734ea288641a68e1cfdc4d'
   }
-];
+}));
+
+// Add Cinema One as the last channel
+channels.push({
+  id: '91',
+  name: 'Cinema One',
+  logo: '/placeholder.svg',
+  streamUrl: 'https://cinemaone-abscbn-ono.amagi.tv/index_3.m3u8'
+});
 
 const Index = () => {
   const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
