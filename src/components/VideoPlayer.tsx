@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import { Maximize2, Minimize2, X } from 'lucide-react';
 import { Button } from './ui/button';
-import * as shaka from 'shaka-player';
+import shaka from 'shaka-player';
 
 interface VideoPlayerProps {
   manifestUrl: string;
@@ -107,14 +107,14 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         controls
         autoPlay
       />
-      <div className="absolute top-4 right-4 flex gap-2">
+      <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center bg-gradient-to-b from-black/70 to-transparent">
         <Button
           variant="ghost"
           size="icon"
           className="glass rounded-full hover:bg-white/90 dark:hover:bg-black/90"
           onClick={onClose}
         >
-          <X className="h-4 w-4" />
+          <X className="h-4 w-4 text-white" />
         </Button>
         <Button
           variant="ghost"
@@ -122,7 +122,11 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
           className="glass rounded-full hover:bg-white/90 dark:hover:bg-black/90"
           onClick={toggleFullscreen}
         >
-          {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+          {isFullscreen ? (
+            <Minimize2 className="h-4 w-4 text-white" />
+          ) : (
+            <Maximize2 className="h-4 w-4 text-white" />
+          )}
         </Button>
       </div>
     </div>
