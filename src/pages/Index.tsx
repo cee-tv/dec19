@@ -3,7 +3,6 @@ import VideoPlayer from '../components/VideoPlayer';
 import ChannelGrid from '../components/ChannelGrid';
 import { Input } from '../components/ui/input';
 import { ScrollArea } from '../components/ui/scroll-area';
-import { Tv } from 'lucide-react';
 
 export interface Channel {
   id: string;
@@ -28,6 +27,7 @@ const channels: Channel[] = Array.from({ length: 90 }, (_, index) => ({
   }
 }));
 
+// Add Cinema One as the last channel
 channels.push({
   id: '91',
   name: 'Cinema One',
@@ -51,12 +51,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 space-y-6">
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <Tv className="w-8 h-8 text-primary" />
-          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            ClearKey Channel Grid
-          </h1>
-        </div>
+        <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+          ClearKey Channel Grid
+        </h1>
         
         <div className="relative">
           <Input
