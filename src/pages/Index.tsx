@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import VideoPlayer from '../components/VideoPlayer';
 import ChannelGrid from '../components/ChannelGrid';
-import { toast } from '../components/ui/use-toast';
 import { Input } from '../components/ui/input';
 import { ScrollArea } from '../components/ui/scroll-area';
 
@@ -47,10 +46,6 @@ const Index = () => {
   const handleChannelSelect = (channel: Channel) => {
     console.log('Selected channel:', channel);
     setSelectedChannel(channel);
-    toast({
-      title: `Now playing: ${channel.name}`,
-      duration: 2000,
-    });
   };
 
   return (

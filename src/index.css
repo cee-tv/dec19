@@ -54,7 +54,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground min-h-screen bg-cover bg-center bg-fixed;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0RswBoSfJFj4KSSf33YSUDonKHx6n0no7M27rO1UsJRJ5ZtLlBXpc5kw&s=10');
+    @apply bg-background text-foreground min-h-screen;
   }
 }

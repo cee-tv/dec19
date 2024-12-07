@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import * as shaka from 'shaka-player';
 import Hls from 'hls.js';
 import { Maximize2, Minimize2, X } from 'lucide-react';
 import { Button } from './ui/button';
+
+// Import shaka-player as a module
+import shaka from 'shaka-player/dist/shaka-player.ui';
 
 interface VideoPlayerProps {
   manifestUrl: string;
@@ -64,7 +66,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             return;
           }
 
-          const player = new shaka.Player(videoRef.current);
+          const player = new shaka.Player();
+          await player.attach(videoRef.current);
           playerRef.current = player;
 
           player.addEventListener('error', (event) => {
@@ -118,7 +121,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         <Button
           variant="ghost"
           size="icon"
-          className="bg-black/50 hover:bg-black/70 text-white"
+          className="bg-black/50 hover:bg-black/70 text-white rounded-full"
           onClick={onClose}
         >
           <X className="h-4 w-4" />
@@ -126,7 +129,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         <Button
           variant="ghost"
           size="icon"
-          className="bg-black/50 hover:bg-black/70 text-white"
+          className="bg-black/50 hover:bg-black/70 text-white rounded-full"
           onClick={toggleFullscreen}
         >
           {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
