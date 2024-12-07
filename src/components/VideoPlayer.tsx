@@ -1,12 +1,15 @@
 import { useEffect, useRef } from 'react';
-import shaka from 'shaka-player';
+import shaka from 'shaka-player/dist/shaka-player.ui';
 
 interface VideoPlayerProps {
   manifestUrl: string;
-  drmUrl?: string;
+  drmKey?: {
+    keyId: string;
+    key: string;
+  };
 }
 
-const VideoPlayer = ({ manifestUrl, drmUrl }: VideoPlayerProps) => {
+const VideoPlayer = ({ manifestUrl, drmKey }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const playerRef = useRef<shaka.Player | null>(null);
 
@@ -37,12 +40,12 @@ const VideoPlayer = ({ manifestUrl, drmUrl }: VideoPlayerProps) => {
           console.error('Error code', event.detail.code, 'object', event.detail);
         });
 
-        // Configure DRM if URL is provided
-        if (drmUrl) {
+        // Configure DRM if key is provided
+        if (drmKey) {
           player.configure({
             drm: {
               clearKeys: {
-                // Add your DRM configuration here
+                [drmKey.keyId]: drmKey.key
               }
             }
           });
@@ -63,7 +66,7 @@ const VideoPlayer = ({ manifestUrl, drmUrl }: VideoPlayerProps) => {
         playerRef.current.destroy();
       }
     };
-  }, [manifestUrl, drmUrl]);
+  }, [manifestUrl, drmKey]);
 
   return (
     <div className="relative w-full aspect-video bg-black">

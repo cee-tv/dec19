@@ -9,22 +9,29 @@ export interface Channel {
   logo: string;
   streamUrl: string;
   drmUrl?: string;
+  drmKey?: {
+    keyId: string;
+    key: string;
+  };
 }
 
 const channels: Channel[] = [
   {
     id: '1',
-    name: 'Channel One',
+    name: 'TV5',
     logo: '/placeholder.svg',
-    streamUrl: 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd',
+    streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd',
+    drmKey: {
+      keyId: '2615129ef2c846a9bbd43a641c7303ef',
+      key: '07c7f996b1734ea288641a68e1cfdc4d'
+    }
   },
   {
     id: '2',
-    name: 'Channel Two',
+    name: 'Cinema One',
     logo: '/placeholder.svg',
-    streamUrl: 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd',
-  },
-  // Add more channels as needed
+    streamUrl: 'https://cinemaone-abscbn-ono.amagi.tv/index_3.m3u8'
+  }
 ];
 
 const Index = () => {
@@ -54,7 +61,7 @@ const Index = () => {
             <div className="rounded-lg overflow-hidden shadow-lg bg-card">
               <VideoPlayer
                 manifestUrl={selectedChannel.streamUrl}
-                drmUrl={selectedChannel.drmUrl}
+                drmKey={selectedChannel.drmKey}
               />
             </div>
           )}
