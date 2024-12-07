@@ -23,15 +23,20 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
         >
           <div className="aspect-video mb-3 overflow-hidden rounded-xl bg-muted">
             <img
-              src={channel.logo}
+              src={channel.id === '1' ? 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d' : channel.logo}
               alt={`${channel.name} logo`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               loading="lazy"
             />
           </div>
-          <h3 className="text-sm font-medium text-card-foreground truncate">
-            {channel.name}
-          </h3>
+          <div className="space-y-1">
+            <h3 className="text-sm font-medium text-card-foreground truncate">
+              {channel.name}
+            </h3>
+            <p className="text-xs text-muted-foreground">
+              Entertainment Group
+            </p>
+          </div>
         </Card>
       ))}
     </div>
