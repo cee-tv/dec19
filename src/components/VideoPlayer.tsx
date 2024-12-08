@@ -92,8 +92,10 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             videoRef.current.play().catch(console.error);
           }
         } else {
-          const shaka = (await import('shaka-player')).default;
+          // Use dynamic import for Shaka Player
+          const { default: shaka } = await import('shaka-player');
           shaka.polyfill.installAll();
+          
           if (!shaka.Player.isBrowserSupported()) {
             console.error('Browser not supported!');
             return;
