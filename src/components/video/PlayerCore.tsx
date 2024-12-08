@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
-import * as shaka from 'shaka-player';
+import shaka from 'shaka-player';
 
 interface PlayerCoreProps {
   manifestUrl: string;
@@ -27,19 +27,34 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
       }
 
       try {
+        // Add event listeners for play state
+        const video = videoRef.current;
+        const handlePlay = () => {
+          const event = new Event('videoplay');
+          video.dispatchEvent(event);
+        };
+        
+        const handlePause = () => {
+          const event = new Event('videopause');
+          video.dispatchEvent(event);
+        };
+
+        video.addEventListener('play', handlePlay);
+        video.addEventListener('pause', handlePause);
+
         if (manifestUrl.includes('.m3u8')) {
           if (Hls.isSupported()) {
             const hls = new Hls({
               enableWorker: true,
               lowLatencyMode: true,
               backBufferLength: 30,
-              maxBufferSize: 30 * 1000 * 1000, // 30MB
+              maxBufferSize: 30 * 1000 * 1000,
               maxBufferLength: 30,
               liveSyncDurationCount: 3,
               liveMaxLatencyDurationCount: 10,
               maxMaxBufferLength: 30,
-              startLevel: -1, // Auto quality selection
-              abrEwmaDefaultEstimate: 500000, // 500kbps default bandwidth estimate
+              startLevel: -1,
+              abrEwmaDefaultEstimate: 500000,
               abrBandWidthFactor: 0.95,
               abrBandWidthUpFactor: 0.7,
               fragLoadingTimeOut: 20000,
@@ -48,16 +63,19 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
             });
             hlsRef.current = hls;
             hls.loadSource(manifestUrl);
-            hls.attachMedia(videoRef.current);
+            hls.attachMedia(video);
 
             hls.on(Hls.Events.MANIFEST_PARSED, () => {
-              videoRef.current?.play();
+              video.play().catch(() => {
+                // Autoplay was prevented
+                handlePause();
+              });
             });
-          } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-            videoRef.current.src = manifestUrl;
+          } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = manifestUrl;
           }
         } else {
-          const player = new shaka.Player(videoRef.current);
+          const player = new shaka.Player(video);
           playerRef.current = player;
 
           player.configure({
@@ -87,8 +105,16 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           }
 
           await player.load(manifestUrl);
-          console.log('Video loaded successfully');
+          video.play().catch(() => {
+            // Autoplay was prevented
+            handlePause();
+          });
         }
+
+        return () => {
+          video.removeEventListener('play', handlePlay);
+          video.removeEventListener('pause', handlePause);
+        };
       } catch (error) {
         console.error('Error loading video:', error);
       }
