@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
 import LoadingSpinner from './video/LoadingSpinner';
+import type { Player } from 'shaka-player';
 
 interface VideoPlayerProps {
   manifestUrl: string;

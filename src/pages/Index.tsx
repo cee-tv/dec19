@@ -3,18 +3,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import ChannelGrid from '../components/ChannelGrid';
 import { Input } from '../components/ui/input';
 import { ScrollArea } from '../components/ui/scroll-area';
-
-export interface Channel {
-  id: string;
-  name: string;
-  logo: string;
-  streamUrl: string;
-  drmUrl?: string;
-  drmKey?: {
-    keyId: string;
-    key: string;
-  };
-}
+import { type Channel } from '../types/channel';
 
 export const channels: Channel[] = [
   {
@@ -937,9 +926,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 space-y-6">
-        <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-          ClearKey Channel Grid
-        </h1>
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <img 
+            src="https://raw.githubusercontent.com/cee-tv/Chinatv/refs/heads/main/Picsart_24-07-19_20-57-59-759.png"
+            alt="CeePlay Logo"
+            className="h-12 w-auto"
+          />
+          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            CeePlay
+          </h1>
+        </div>
         
         <div className="relative">
           <Input
