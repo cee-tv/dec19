@@ -31,27 +31,11 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
             const hls = new Hls({
               enableWorker: true,
               lowLatencyMode: true,
-              backBufferLength: 30,
-              maxBufferSize: 30 * 1000 * 1000, // 30MB
-              maxBufferLength: 30,
-              liveSyncDurationCount: 3,
-              liveMaxLatencyDurationCount: 10,
-              maxMaxBufferLength: 30,
-              startLevel: -1, // Auto quality selection
-              abrEwmaDefaultEstimate: 500000, // 500kbps default bandwidth estimate
-              abrBandWidthFactor: 0.95,
-              abrBandWidthUpFactor: 0.7,
-              fragLoadingTimeOut: 20000,
-              manifestLoadingTimeOut: 20000,
-              levelLoadingTimeOut: 20000
+              backBufferLength: 90
             });
             hlsRef.current = hls;
             hls.loadSource(manifestUrl);
             hls.attachMedia(videoRef.current);
-
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-              videoRef.current?.play();
-            });
           } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = manifestUrl;
           }
@@ -66,22 +50,6 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           const player = new shaka.Player(videoRef.current);
           playerRef.current = player;
 
-          player.configure({
-            streaming: {
-              bufferingGoal: 30,
-              rebufferingGoal: 2,
-              bufferBehind: 30,
-              retryParameters: {
-                maxAttempts: 4,
-                baseDelay: 1000,
-                backoffFactor: 2,
-                fuzzFactor: 0.5
-              },
-              smallGapLimit: 0.5,
-              jumpLargeGaps: true
-            }
-          });
-
           if (drmKey) {
             player.configure({
               drm: {
@@ -93,7 +61,6 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           }
 
           await player.load(manifestUrl);
-          console.log('Video loaded successfully');
         }
       } catch (error) {
         console.error('Error loading video:', error);
