@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
+import { cn } from '@/lib/utils';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
 import LoadingSpinner from './video/LoadingSpinner';
-import type { VideoPlayerProps } from './video/VideoPlayerTypes';
 
-declare const shaka: any; // Fix for TypeScript shaka-player type issues
+interface VideoPlayerProps {
+  manifestUrl: string;
+  drmKey?: {
+    keyId: string;
+    key: string;
+  };
+  onClose?: () => void;
+}
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -107,7 +114,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
-          await import('shaka-player/dist/shaka-player.compiled');
+          const shaka = await import('shaka-player/dist/shaka-player.compiled');
+          shaka.polyfill.installAll();
           
           if (!shaka.Player.isBrowserSupported()) {
             console.error('Browser not supported!');
@@ -129,6 +137,10 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
 
           await player.load(manifestUrl);
           console.log('The video has now been loaded!');
+          
+          if (containerRef.current) {
+            containerRef.current.requestFullscreen();
+          }
         }
       } catch (error) {
         console.error('Error loading video:', error);
@@ -185,6 +197,27 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
       
       <LoadingSpinner isVisible={isBuffering} />
       
+      {/* Close button - always visible */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group flex items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 text-white group-hover:scale-110 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
       <VideoControls
         isPlaying={isPlaying}
         isFullscreen={isFullscreen}
@@ -195,7 +228,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onFullscreenToggle={toggleFullscreen}
         onVolumeChange={handleVolumeChange}
         onMuteToggle={toggleMute}
-        onClose={onClose}
       />
 
       <CenterPlayButton
