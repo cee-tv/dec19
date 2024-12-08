@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import VideoControls from './video/VideoControls';
-import CenterPlayButton from './video/CenterPlayButton';
 import PlayerCore from './video/PlayerCore';
 import type { VideoPlayerProps } from './video/VideoPlayerTypes';
+import { Loader2 } from 'lucide-react';
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -12,6 +12,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [isBuffering, setIsBuffering] = useState(false);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -67,13 +68,26 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
     };
 
     const container = containerRef.current;
+    const video = videoRef.current;
+
     if (container) {
       container.addEventListener('mousemove', handleMouseMove);
+    }
+
+    if (video) {
+      video.addEventListener('waiting', () => setIsBuffering(true));
+      video.addEventListener('playing', () => setIsBuffering(false));
+      video.addEventListener('canplay', () => setIsBuffering(false));
     }
 
     return () => {
       if (container) {
         container.removeEventListener('mousemove', handleMouseMove);
+      }
+      if (video) {
+        video.removeEventListener('waiting', () => setIsBuffering(true));
+        video.removeEventListener('playing', () => setIsBuffering(false));
+        video.removeEventListener('canplay', () => setIsBuffering(false));
       }
       clearTimeout(timeout);
     };
@@ -98,6 +112,12 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         videoRef={videoRef}
       />
       
+      {isBuffering && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+          <Loader2 className="w-12 h-12 text-white animate-spin" />
+        </div>
+      )}
+
       <VideoControls
         isPlaying={isPlaying}
         isFullscreen={isFullscreen}
@@ -109,12 +129,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onVolumeChange={handleVolumeChange}
         onMuteToggle={toggleMute}
         onClose={onClose}
-      />
-
-      <CenterPlayButton
-        isPlaying={isPlaying}
-        showControls={showControls}
-        onClick={togglePlay}
       />
     </div>
   );
