@@ -2,18 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
 import PlayerCore from './video/PlayerCore';
-import LoadingSpinner from './video/LoadingSpinner';
 import type { VideoPlayerProps } from './video/VideoPlayerTypes';
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);  // Changed to false initially
-  const [isPlaying, setIsPlaying] = useState(false);  // Changed to false initially
+  const [isFullscreen, setIsFullscreen] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [isBuffering, setIsBuffering] = useState(true);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -73,34 +71,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
       container.addEventListener('mousemove', handleMouseMove);
     }
 
-    // Add video event listeners for buffering state
-    const video = videoRef.current;
-    if (video) {
-      const handleWaiting = () => setIsBuffering(true);
-      const handlePlaying = () => setIsBuffering(false);
-      const handleCanPlay = () => {
-        setIsBuffering(false);
-        video.play().catch(() => {
-          // Autoplay was prevented
-          setIsPlaying(false);
-        });
-      };
-
-      video.addEventListener('waiting', handleWaiting);
-      video.addEventListener('playing', handlePlaying);
-      video.addEventListener('canplay', handleCanPlay);
-
-      return () => {
-        if (container) {
-          container.removeEventListener('mousemove', handleMouseMove);
-        }
-        video.removeEventListener('waiting', handleWaiting);
-        video.removeEventListener('playing', handlePlaying);
-        video.removeEventListener('canplay', handleCanPlay);
-        clearTimeout(timeout);
-      };
-    }
-
     return () => {
       if (container) {
         container.removeEventListener('mousemove', handleMouseMove);
@@ -128,8 +98,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         videoRef={videoRef}
       />
       
-      <LoadingSpinner isVisible={isBuffering} />
-
       <VideoControls
         isPlaying={isPlaying}
         isFullscreen={isFullscreen}
