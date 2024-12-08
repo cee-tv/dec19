@@ -4,6 +4,9 @@ import { cn } from '@/lib/utils';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
 
+// Import Shaka Player as a namespace
+import * as shaka from 'shaka-player/dist/shaka-player.compiled';
+
 interface VideoPlayerProps {
   manifestUrl: string;
   drmKey?: {
@@ -15,7 +18,7 @@ interface VideoPlayerProps {
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<shaka.Player | null>(null);
   const hlsRef = useRef<Hls | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(true);
@@ -23,6 +26,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -67,6 +72,12 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
     }
   };
 
+  const handleTimeUpdate = () => {
+    if (!videoRef.current) return;
+    setCurrentTime(videoRef.current.currentTime);
+    setDuration(videoRef.current.duration);
+  };
+
   useEffect(() => {
     const initPlayer = async () => {
       if (!videoRef.current) return;
@@ -90,8 +101,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
-          // Use dynamic import for Shaka Player
-          const shaka = await import('shaka-player');
           shaka.polyfill.installAll();
           
           if (!shaka.Player.isBrowserSupported()) {
@@ -170,9 +179,9 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         ref={videoRef}
         className="w-full h-full"
         onClick={togglePlay}
+        onTimeUpdate={handleTimeUpdate}
       />
       
-      {/* Close button - always visible */}
       <button
         onClick={onClose}
         className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group flex items-center justify-center"
@@ -199,6 +208,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         volume={volume}
         isMuted={isMuted}
         showControls={showControls}
+        currentTime={currentTime}
+        duration={duration}
         onPlayPause={togglePlay}
         onFullscreenToggle={toggleFullscreen}
         onClose={onClose}
