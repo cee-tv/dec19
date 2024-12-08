@@ -36,13 +36,14 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
             size="icon"
             className={cn(
               "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-              "bg-red-500/90 hover:bg-red-600/90 text-white rounded-full p-6",
+              "bg-[rgba(229,9,20,0.8)] hover:bg-[rgba(229,9,20,0.9)]",
+              "w-[50px] h-[50px] p-0 flex items-center justify-center",
               "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-              "border-2 border-white/50"
+              "border-none rounded-full"
             )}
             onClick={() => onChannelSelect(channel)}
           >
-            <Play className="h-8 w-8" />
+            <Play className="h-5 w-5" />
           </Button>
           
           <div className={cn(
