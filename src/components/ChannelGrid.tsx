@@ -11,10 +11,12 @@ interface ChannelGridProps {
 }
 
 const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGridProps) => {
+  const selectedChannel = channels.find(channel => channel.id === selectedChannelId);
+  
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-center bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
-        Available Channels ({channels.length})
+        {selectedChannel ? selectedChannel.name : `Available Channels (${channels.length})`}
       </h2>
       
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -50,12 +52,15 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
               <Play className="h-8 w-8" />
             </Button>
             
-            <div className={cn(
-              "absolute bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm",
-              "transform transition-transform duration-300",
-              selectedChannelId === channel.id ? "translate-y-0" : "translate-y-full",
-              "group-hover:translate-y-0"
-            )}>
+            <div 
+              className={cn(
+                "absolute bottom-0 left-0 right-0",
+                "bg-gradient-to-t from-black/90 to-transparent",
+                "transform transition-transform duration-300",
+                selectedChannelId === channel.id ? "translate-y-0" : "translate-y-full",
+                "group-hover:translate-y-0"
+              )}
+            >
               <h3 className="text-sm font-medium text-white p-3 text-center">
                 {channel.name}
               </h3>
