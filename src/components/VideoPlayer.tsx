@@ -2,10 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
-import LoadingSpinner from './video/LoadingSpinner';
 import type { VideoPlayerProps } from './video/VideoPlayerTypes';
-
-declare const shaka: any; // Fix for TypeScript shaka-player type issues
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -17,29 +14,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [isBuffering, setIsBuffering] = useState(true);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleWaiting = () => setIsBuffering(true);
-    const handlePlaying = () => setIsBuffering(false);
-    const handleSeeking = () => setIsBuffering(true);
-    const handleSeeked = () => setIsBuffering(false);
-
-    video.addEventListener('waiting', handleWaiting);
-    video.addEventListener('playing', handlePlaying);
-    video.addEventListener('seeking', handleSeeking);
-    video.addEventListener('seeked', handleSeeked);
-
-    return () => {
-      video.removeEventListener('waiting', handleWaiting);
-      video.removeEventListener('playing', handlePlaying);
-      video.removeEventListener('seeking', handleSeeking);
-      video.removeEventListener('seeked', handleSeeked);
-    };
-  }, []);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -84,6 +60,24 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
     }
   };
 
+  const handleSeek = (time: number) => {
+    if (!videoRef.current) return;
+    videoRef.current.currentTime = time;
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(video.currentTime);
+      setDuration(video.duration);
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate);
+  }, []);
+
   useEffect(() => {
     const initPlayer = async () => {
       if (!videoRef.current) return;
@@ -107,7 +101,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
-          await import('shaka-player/dist/shaka-player.compiled');
+          const { default: shaka } = await import('shaka-player');
           
           if (!shaka.Player.isBrowserSupported()) {
             console.error('Browser not supported!');
@@ -183,18 +177,19 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onClick={togglePlay}
       />
       
-      <LoadingSpinner isVisible={isBuffering} />
-      
       <VideoControls
         isPlaying={isPlaying}
         isFullscreen={isFullscreen}
         volume={volume}
         isMuted={isMuted}
         showControls={showControls}
+        currentTime={currentTime}
+        duration={duration}
         onPlayPause={togglePlay}
         onFullscreenToggle={toggleFullscreen}
         onVolumeChange={handleVolumeChange}
         onMuteToggle={toggleMute}
+        onSeek={handleSeek}
         onClose={onClose}
       />
 

@@ -3,6 +3,7 @@ import { Button } from '../ui/button';
 import { Slider } from '../ui/slider';
 import { cn } from '@/lib/utils';
 import { VideoControlsProps } from './VideoPlayerTypes';
+import ProgressBar from './ProgressBar';
 
 const VideoControls = ({
   isPlaying,
@@ -10,10 +11,13 @@ const VideoControls = ({
   volume,
   isMuted,
   showControls,
+  currentTime,
+  duration,
   onPlayPause,
   onFullscreenToggle,
   onVolumeChange,
   onMuteToggle,
+  onSeek,
   onClose
 }: VideoControlsProps) => {
   return (
@@ -24,7 +28,13 @@ const VideoControls = ({
         showControls ? "opacity-100" : "opacity-0"
       )}
     >
-      <div className="flex items-center gap-4">
+      <ProgressBar
+        currentTime={currentTime}
+        duration={duration}
+        onSeek={onSeek}
+      />
+      
+      <div className="flex items-center gap-4 mt-2">
         <Button
           variant="ghost"
           size="icon"
