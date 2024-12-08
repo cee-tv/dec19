@@ -4,6 +4,7 @@ import ChannelGrid from '../components/ChannelGrid';
 import { Input } from '../components/ui/input';
 import { ScrollArea } from '../components/ui/scroll-area';
 import { channels } from '../data/channels';
+import { Channel } from '../types/channel';
 
 const Index = () => {
   const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);

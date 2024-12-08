@@ -1,21 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import Hls from 'hls.js';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
+import PlayerCore from './video/PlayerCore';
 import type { VideoPlayerProps } from './video/VideoPlayerTypes';
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<any>(null);
-  const hlsRef = useRef<Hls | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -60,87 +56,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
     }
   };
 
-  const handleSeek = (time: number) => {
-    if (!videoRef.current) return;
-    videoRef.current.currentTime = time;
-  };
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleTimeUpdate = () => {
-      setCurrentTime(video.currentTime);
-      setDuration(video.duration);
-    };
-
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    return () => video.removeEventListener('timeupdate', handleTimeUpdate);
-  }, []);
-
-  useEffect(() => {
-    const initPlayer = async () => {
-      if (!videoRef.current) return;
-
-      if (playerRef.current) {
-        await playerRef.current.destroy();
-      }
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-      }
-
-      try {
-        if (manifestUrl.includes('.m3u8')) {
-          if (Hls.isSupported()) {
-            const hls = new Hls();
-            hlsRef.current = hls;
-            hls.loadSource(manifestUrl);
-            hls.attachMedia(videoRef.current);
-            console.log('HLS player initialized');
-          } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-            videoRef.current.src = manifestUrl;
-          }
-        } else {
-          const { default: shaka } = await import('shaka-player');
-          
-          if (!shaka.Player.isBrowserSupported()) {
-            console.error('Browser not supported!');
-            return;
-          }
-
-          const player = new shaka.Player(videoRef.current);
-          playerRef.current = player;
-
-          if (drmKey) {
-            player.configure({
-              drm: {
-                clearKeys: {
-                  [drmKey.keyId]: drmKey.key
-                }
-              }
-            });
-          }
-
-          await player.load(manifestUrl);
-          console.log('The video has now been loaded!');
-        }
-      } catch (error) {
-        console.error('Error loading video:', error);
-      }
-    };
-
-    initPlayer();
-
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.destroy();
-      }
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-      }
-    };
-  }, [manifestUrl, drmKey]);
-
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const handleMouseMove = () => {
@@ -177,19 +92,22 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onClick={togglePlay}
       />
       
+      <PlayerCore
+        manifestUrl={manifestUrl}
+        drmKey={drmKey}
+        videoRef={videoRef}
+      />
+      
       <VideoControls
         isPlaying={isPlaying}
         isFullscreen={isFullscreen}
         volume={volume}
         isMuted={isMuted}
         showControls={showControls}
-        currentTime={currentTime}
-        duration={duration}
         onPlayPause={togglePlay}
         onFullscreenToggle={toggleFullscreen}
         onVolumeChange={handleVolumeChange}
         onMuteToggle={toggleMute}
-        onSeek={handleSeek}
         onClose={onClose}
       />
 

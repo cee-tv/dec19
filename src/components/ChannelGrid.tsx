@@ -1,4 +1,4 @@
-import { Channel } from '../pages/Index';
+import { Channel } from '../types/channel';
 import { cn } from '../lib/utils';
 import { Card } from './ui/card';
 import { Play } from 'lucide-react';

@@ -13,12 +13,9 @@ export interface VideoControlsProps {
   volume: number;
   isMuted: boolean;
   showControls: boolean;
-  currentTime: number;
-  duration: number;
   onPlayPause: () => void;
   onFullscreenToggle: () => void;
   onVolumeChange: (value: number[]) => void;
   onMuteToggle: () => void;
-  onSeek?: (time: number) => void;
   onClose?: () => void;
 }
