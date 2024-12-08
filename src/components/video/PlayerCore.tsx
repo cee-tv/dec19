@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
+import * as shaka from 'shaka-player';
 
 interface PlayerCoreProps {
   manifestUrl: string;
@@ -11,7 +12,7 @@ interface PlayerCoreProps {
 }
 
 const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<shaka.Player | null>(null);
   const hlsRef = useRef<Hls | null>(null);
 
   useEffect(() => {
@@ -40,14 +41,15 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
-          const { default: shaka } = await import('shaka-player');
+          shaka.polyfill.installAll();
           
           if (!shaka.Player.isBrowserSupported()) {
             console.error('Browser not supported!');
             return;
           }
 
-          const player = new shaka.Player(videoRef.current);
+          const player = new shaka.Player();
+          await player.attach(videoRef.current);
           playerRef.current = player;
 
           if (drmKey) {
@@ -56,6 +58,15 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
                 clearKeys: {
                   [drmKey.keyId]: drmKey.key
                 }
+              },
+              streaming: {
+                bufferingGoal: 30,
+                rebufferingGoal: 15,
+                bufferBehind: 30
+              },
+              abr: {
+                enabled: true,
+                defaultBandwidthEstimate: 1000000
               }
             });
           }
