@@ -1,5 +1,5 @@
 import React from 'react';
-import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Slider } from '../ui/slider';
 import { cn } from '@/lib/utils';
@@ -25,7 +25,6 @@ const VideoControls = ({
   showControls,
   onPlayPause,
   onFullscreenToggle,
-  onClose,
   onVolumeChange,
   onMuteToggle
 }: VideoControlsProps) => {
@@ -35,18 +34,6 @@ const VideoControls = ({
       "opacity-0 transition-opacity duration-300",
       showControls ? 'opacity-100' : 'opacity-0'
     )}>
-      {/* Top right close button */}
-      <div className="absolute top-4 right-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group"
-          onClick={onClose}
-        >
-          <X className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-        </Button>
-      </div>
-
       {/* Bottom controls */}
       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
         <div className="flex items-center gap-4">

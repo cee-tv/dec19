@@ -86,14 +86,12 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             hls.loadSource(manifestUrl);
             hls.attachMedia(videoRef.current);
             console.log('HLS player initialized');
-            videoRef.current.play().catch(console.error);
           } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = manifestUrl;
-            videoRef.current.play().catch(console.error);
           }
         } else {
           // Use dynamic import for Shaka Player
-          const { default: shaka } = await import('shaka-player');
+          const shaka = await import('shaka-player');
           shaka.polyfill.installAll();
           
           if (!shaka.Player.isBrowserSupported()) {
@@ -116,7 +114,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
 
           await player.load(manifestUrl);
           console.log('The video has now been loaded!');
-          videoRef.current.play().catch(console.error);
           
           if (containerRef.current) {
             containerRef.current.requestFullscreen();
@@ -175,6 +172,27 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onClick={togglePlay}
       />
       
+      {/* Close button - always visible */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group flex items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 text-white group-hover:scale-110 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
       <VideoControls
         isPlaying={isPlaying}
         isFullscreen={isFullscreen}
