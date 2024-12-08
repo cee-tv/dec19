@@ -1,4 +1,4 @@
-import { FastForward, Maximize2, Minimize2, Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Slider } from '../ui/slider';
 import { cn } from '@/lib/utils';
@@ -52,20 +52,6 @@ const VideoControls = ({
             ) : (
               <Play className="h-8 w-8 ml-1" />
             )}
-          </Button>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white hover:bg-white/20 rounded-full"
-            onClick={() => {
-              const video = document.querySelector('video');
-              if (video) {
-                video.currentTime += 10;
-              }
-            }}
-          >
-            <FastForward className="h-6 w-6" />
           </Button>
 
           <div className="flex items-center gap-2">

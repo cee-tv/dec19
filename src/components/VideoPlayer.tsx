@@ -7,12 +7,12 @@ import { Loader2 } from 'lucide-react';
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isFullscreen, setIsFullscreen] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true); // Set to true for autoplay
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [isBuffering, setIsBuffering] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(true); // Start with buffering true
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -77,7 +77,10 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
     if (video) {
       video.addEventListener('waiting', () => setIsBuffering(true));
       video.addEventListener('playing', () => setIsBuffering(false));
-      video.addEventListener('canplay', () => setIsBuffering(false));
+      video.addEventListener('canplay', () => {
+        setIsBuffering(false);
+        video.play(); // Autoplay when ready
+      });
     }
 
     return () => {
