@@ -3,6 +3,7 @@ import Hls from 'hls.js';
 import { cn } from '@/lib/utils';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
+import LoadingSpinner from './video/LoadingSpinner';
 
 interface VideoPlayerProps {
   manifestUrl: string;
@@ -23,6 +24,29 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [isBuffering, setIsBuffering] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleWaiting = () => setIsBuffering(true);
+    const handlePlaying = () => setIsBuffering(false);
+    const handleSeeking = () => setIsBuffering(true);
+    const handleSeeked = () => setIsBuffering(false);
+
+    video.addEventListener('waiting', handleWaiting);
+    video.addEventListener('playing', handlePlaying);
+    video.addEventListener('seeking', handleSeeking);
+    video.addEventListener('seeked', handleSeeked);
+
+    return () => {
+      video.removeEventListener('waiting', handleWaiting);
+      video.removeEventListener('playing', handlePlaying);
+      video.removeEventListener('seeking', handleSeeking);
+      video.removeEventListener('seeked', handleSeeked);
+    };
+  }, []);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -90,8 +114,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
-          // Use dynamic import for Shaka Player
-          const shaka = await import('shaka-player');
+          const shaka = await import('shaka-player/dist/shaka-player.compiled');
           shaka.polyfill.installAll();
           
           if (!shaka.Player.isBrowserSupported()) {
@@ -172,6 +195,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onClick={togglePlay}
       />
       
+      <LoadingSpinner isVisible={isBuffering} />
+      
       {/* Close button - always visible */}
       <button
         onClick={onClose}
@@ -201,7 +226,6 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         showControls={showControls}
         onPlayPause={togglePlay}
         onFullscreenToggle={toggleFullscreen}
-        onClose={onClose}
         onVolumeChange={handleVolumeChange}
         onMuteToggle={toggleMute}
       />

@@ -12,13 +12,13 @@ interface ChannelGridProps {
 
 const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGridProps) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
       {channels.map((channel) => (
         <Card
           key={channel.id}
           className={cn(
             "group relative aspect-square cursor-pointer transition-all duration-300 glass overflow-hidden",
-            "hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-2xl",
+            "hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-xl",
             selectedChannelId === channel.id && "ring-2 ring-primary",
           )}
         >
@@ -37,13 +37,13 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
             className={cn(
               "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
               "bg-[rgba(229,9,20,0.8)] hover:bg-[rgba(229,9,20,0.9)]",
-              "w-[50px] h-[50px] p-0 flex items-center justify-center",
+              "w-[40px] h-[40px] p-0 flex items-center justify-center",
               "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
               "border-none rounded-full"
             )}
             onClick={() => onChannelSelect(channel)}
           >
-            <Play className="h-5 w-5" />
+            <Play className="h-4 w-4" />
           </Button>
           
           <div className={cn(
@@ -51,9 +51,9 @@ const ChannelGrid = ({ channels, onChannelSelect, selectedChannelId }: ChannelGr
             "bg-gradient-to-t from-black/90 to-transparent",
             "transform transition-transform duration-300",
             selectedChannelId === channel.id ? "translate-y-0" : "translate-y-full",
-            "group-hover:translate-y-0 p-4"
+            "group-hover:translate-y-0 p-2"
           )}>
-            <h3 className="text-sm font-medium text-white text-center">
+            <h3 className="text-xs font-medium text-white text-center truncate">
               {channel.name}
             </h3>
           </div>
