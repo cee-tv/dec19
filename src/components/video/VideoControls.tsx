@@ -3,7 +3,6 @@ import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX } from 'lucide-reac
 import { Button } from '../ui/button';
 import { Slider } from '../ui/slider';
 import { cn } from '@/lib/utils';
-import ProgressBar from './ProgressBar';
 
 interface VideoControlsProps {
   isPlaying: boolean;
@@ -11,8 +10,6 @@ interface VideoControlsProps {
   volume: number;
   isMuted: boolean;
   showControls: boolean;
-  currentTime: number;
-  duration: number;
   onPlayPause: () => void;
   onFullscreenToggle: () => void;
   onClose: () => void;
@@ -26,13 +23,10 @@ const VideoControls = ({
   volume,
   isMuted,
   showControls,
-  currentTime,
-  duration,
   onPlayPause,
   onFullscreenToggle,
   onVolumeChange,
-  onMuteToggle,
-  onClose
+  onMuteToggle
 }: VideoControlsProps) => {
   return (
     <div className={cn(
@@ -40,10 +34,10 @@ const VideoControls = ({
       "opacity-0 transition-opacity duration-300",
       showControls ? 'opacity-100' : 'opacity-0'
     )}>
-      <ProgressBar currentTime={currentTime} duration={duration} />
-      
+      {/* Bottom controls */}
       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
+          {/* Left side play/pause button */}
           <Button
             variant="ghost"
             size="icon"
@@ -57,6 +51,7 @@ const VideoControls = ({
             )}
           </Button>
 
+          {/* Volume controls */}
           <Button
             variant="ghost"
             size="icon"
@@ -81,6 +76,7 @@ const VideoControls = ({
           </div>
         </div>
 
+        {/* Right side fullscreen button */}
         <Button
           variant="ghost"
           size="icon"
