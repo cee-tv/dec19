@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
-import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
-import { Button } from './ui/button';
-import { Slider } from './ui/slider';
-import shaka from 'shaka-player';
 import { cn } from '@/lib/utils';
+import VideoControls from './video/VideoControls';
+import CenterPlayButton from './video/CenterPlayButton';
 
 interface VideoPlayerProps {
   manifestUrl: string;
@@ -17,7 +15,7 @@ interface VideoPlayerProps {
 
 const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<shaka.Player | null>(null);
+  const playerRef = useRef<any>(null);
   const hlsRef = useRef<Hls | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(true);
@@ -88,10 +86,13 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             hls.loadSource(manifestUrl);
             hls.attachMedia(videoRef.current);
             console.log('HLS player initialized');
+            videoRef.current.play().catch(console.error);
           } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = manifestUrl;
+            videoRef.current.play().catch(console.error);
           }
         } else {
+          const shaka = (await import('shaka-player')).default;
           shaka.polyfill.installAll();
           if (!shaka.Player.isBrowserSupported()) {
             console.error('Browser not supported!');
@@ -113,6 +114,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
 
           await player.load(manifestUrl);
           console.log('The video has now been loaded!');
+          videoRef.current.play().catch(console.error);
           
           if (containerRef.current) {
             containerRef.current.requestFullscreen();
@@ -171,75 +173,24 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onClick={togglePlay}
       />
       
-      <div className={cn(
-        "absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/60",
-        "opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-        showControls ? 'opacity-100' : 'opacity-0'
-      )}>
-        {/* Top controls */}
-        <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group"
-            onClick={onClose}
-          >
-            <X className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group"
-            onClick={toggleFullscreen}
-          >
-            {isFullscreen ? (
-              <Minimize2 className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-            ) : (
-              <Maximize2 className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-            )}
-          </Button>
-        </div>
+      <VideoControls
+        isPlaying={isPlaying}
+        isFullscreen={isFullscreen}
+        volume={volume}
+        isMuted={isMuted}
+        showControls={showControls}
+        onPlayPause={togglePlay}
+        onFullscreenToggle={toggleFullscreen}
+        onClose={onClose}
+        onVolumeChange={handleVolumeChange}
+        onMuteToggle={toggleMute}
+      />
 
-        {/* Center play/pause button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group"
-          onClick={togglePlay}
-        >
-          {isPlaying ? (
-            <Pause className="h-8 w-8 text-white group-hover:scale-110 transition-transform" />
-          ) : (
-            <Play className="h-8 w-8 text-white group-hover:scale-110 transition-transform ml-1" />
-          )}
-        </Button>
-
-        {/* Bottom controls */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="w-10 h-10 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-sm border border-white/10 transition-all duration-200 group"
-            onClick={toggleMute}
-          >
-            {isMuted ? (
-              <VolumeX className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-            ) : (
-              <Volume2 className="h-5 w-5 text-white group-hover:scale-110 transition-transform" />
-            )}
-          </Button>
-          <div className="w-32">
-            <Slider
-              value={[isMuted ? 0 : volume]}
-              min={0}
-              max={1}
-              step={0.1}
-              onValueChange={handleVolumeChange}
-              className="cursor-pointer"
-            />
-          </div>
-        </div>
-      </div>
+      <CenterPlayButton
+        isPlaying={isPlaying}
+        showControls={showControls}
+        onClick={togglePlay}
+      />
     </div>
   );
 };
