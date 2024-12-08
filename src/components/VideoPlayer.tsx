@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import { Maximize2, Minimize2, X } from 'lucide-react';
 import { Button } from './ui/button';
-import * as shaka from 'shaka-player';
+import shaka from 'shaka-player';
 
 interface VideoPlayerProps {
   manifestUrl: string;
@@ -61,8 +61,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
             return;
           }
 
-          const player = new shaka.Player();
-          await player.attach(videoRef.current);
+          const player = new shaka.Player(videoRef.current);
           playerRef.current = player;
 
           if (drmKey) {
