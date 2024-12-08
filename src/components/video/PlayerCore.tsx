@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
+import * as shaka from 'shaka-player';
 
 interface PlayerCoreProps {
   manifestUrl: string;
@@ -56,13 +57,6 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
-          const { default: shaka } = await import('shaka-player');
-          
-          if (!shaka.Player.isBrowserSupported()) {
-            console.error('Browser not supported!');
-            return;
-          }
-
           const player = new shaka.Player(videoRef.current);
           playerRef.current = player;
 
