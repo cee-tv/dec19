@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils';
 import VideoControls from './video/VideoControls';
 import CenterPlayButton from './video/CenterPlayButton';
 
-// Import Shaka Player as a namespace
-import * as shaka from 'shaka-player/dist/shaka-player.compiled';
+// Import Shaka Player properly
+import shaka from 'shaka-player/dist/shaka-player.compiled';
 
 interface VideoPlayerProps {
   manifestUrl: string;
