@@ -398,7 +398,8 @@ export const channels: Channel[] = [
  id: '41',               name: 'HBO HITS',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-50-33-890.jpg',
                 drmKey: {
-    keyId: 'b04ae8017b5b4601a5a0c9060f6d5b7d:a8795f3bdb8a4778b7e888ee484cc7a1',
+    keyId: 'b04ae8017b5b4601a5a0c9060f6d5b7d',
+    key: 'a8795f3bdb8a4778b7e888ee484cc7a1',
                 streamUrl: 'https://qp-pldt-live-grp-09-prod.akamaized.net/out/u/cg_hbohits.mpd'
                
                  
@@ -407,7 +408,8 @@ export const channels: Channel[] = [
  id: '42',               name: 'HITS HD',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-50-58-048.jpg',
                 drmKey: {
-    keyId: 'dac605bc197e442c93f4f08595a95100:975e27ffc1b7949721ee3ccb4b7fd3e5',
+    keyId: 'dac605bc197e442c93f4f08595a95100',
+    key: '975e27ffc1b7949721ee3ccb4b7fd3e5',
                 streamUrl: 'https://qp-pldt-live-grp-04-prod.akamaized.net/out/u/hits_hd1.mpd'
                
                  
@@ -416,7 +418,8 @@ export const channels: Channel[] = [
  id: '43',               name: 'HITS MOVIES',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-51-21-331.jpg',
                 drmKey: {
-    keyId: '0f85439a412b11edb8780242ac120002:7199bc900b9e23087d3a2c0c6d4edce4',
+    keyId: '0f85439a412b11edb8780242ac120002',
+    key: '7199bc900b9e23087d3a2c0c6d4edce4',
                 streamUrl: 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_hitsmovies.mpd'
                
                  
@@ -425,7 +428,8 @@ export const channels: Channel[] = [
  id: '44',               name: 'THRILL',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-51-39-406.jpg',
                 drmKey: {
-    keyId: '928114ffb2394d14b5585258f70ed183:a82edc340bc73447bac16cdfed0a4c62',
+    keyId: '928114ffb2394d14b5585258f70ed183',
+    key: 'a82edc340bc73447bac16cdfed0a4c62',
                 streamUrl: 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/cg_thrill_sd.mpd'
                
                  
@@ -434,7 +438,8 @@ export const channels: Channel[] = [
  id: '45',               name: 'TAP ACTIONFLIX',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-52-23-482.jpg',
                 drmKey: {
-    keyId: 'bee1066160c0424696d9bf99ca0645e3:f5b72bf3b89b9848de5616f37de040b7',
+    keyId: 'bee1066160c0424696d9bf99ca0645e3',
+    key: 'f5b72bf3b89b9848de5616f37de040b7',
                 streamUrl: 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/cg_tapactionflix_hd1.mpd'
                
                  
@@ -443,7 +448,8 @@ export const channels: Channel[] = [
  id: '46',               name: 'AXN',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-54-06-223.jpg',
                 drmKey: {
-    keyId: 'fd5d928f5d974ca4983f6e9295dfe410:3aaa001ddc142fedbb9d5557be43792f',
+    keyId: 'fd5d928f5d974ca4983f6e9295dfe410',
+    key: '3aaa001ddc142fedbb9d5557be43792f',
                 streamUrl: 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/cg_axn_sd.mpd'
                
                  
@@ -452,7 +458,8 @@ export const channels: Channel[] = [
  id: '47',               name: 'CINEMAX',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-54-30-105.jpg',
                 drmKey: {
-    keyId: 'b207c44332844523a3a3b0469e5652d7:fe71aea346db08f8c6fbf0592209f955',
+    keyId: 'b207c44332844523a3a3b0469e5652d7',
+    key: 'fe71aea346db08f8c6fbf0592209f955',
                 streamUrl: 'https://qp-pldt-live-grp-01-prod.akamaized.net/out/u/cg_cinemax.mpd'
                
                  
@@ -461,7 +468,8 @@ export const channels: Channel[] = [
  id: '48',               name: 'WARNER TV',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-54-57-106.jpg',
                 drmKey: {
-    keyId: '4503cf86bca3494ab95a77ed913619a0:afc9c8f627fb3fb255dee8e3b0fe1d71',
+    keyId: '4503cf86bca3494ab95a77ed913619a0',
+    key: 'afc9c8f627fb3fb255dee8e3b0fe1d71',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_warnertvhd.mpd'
                
                  
@@ -506,7 +514,8 @@ export const channels: Channel[] = [
  id: '54',               name: 'KIX',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_13-58-03-800.jpg',
                 drmKey: {
-    keyId: 'a8d5712967cd495ca80fdc425bc61d6b:f248c29525ed4c40cc39baeee9634735',
+    keyId: 'a8d5712967cd495ca80fdc425bc61d6b',
+    key: 'f248c29525ed4c40cc39baeee9634735',
                 streamUrl: 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/kix_hd1.mpd'
                
                  
@@ -529,7 +538,8 @@ export const channels: Channel[] = [
  id: '57',               name: 'TVN MOVIES',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-00-09-670.jpg',
                 drmKey: {
-    keyId: '2e53f8d8a5e94bca8f9a1e16ce67df33:3471b2464b5c7b033a03bb8307d9fa35',
+    keyId: '2e53f8d8a5e94bca8f9a1e16ce67df33',
+    key: '3471b2464b5c7b033a03bb8307d9fa35',
                 streamUrl: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_tvnmovie.mpd'
                
                  
@@ -538,7 +548,8 @@ export const channels: Channel[] = [
  id: '58',               name: 'TVN PREMIUM',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-00-23-245.jpg',
                 drmKey: {
-    keyId: 'e1bde543e8a140b38d3f84ace746553e:b712c4ec307300043333a6899a402c10',
+    keyId: 'e1bde543e8a140b38d3f84ace746553e',
+    key: 'b712c4ec307300043333a6899a402c10',
                 streamUrl: 'https://qp-pldt-live-grp-09-prod.akamaized.net/out/u/cg_tvnpre.mpd'
                
                  
@@ -547,7 +558,8 @@ export const channels: Channel[] = [
  id: '59',               name: 'TAP MOVIES',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-00-39-992.jpg',
                 drmKey: {
-    keyId: '286e1c2d622c4c73b5c3d72e4a848abd:b7fad67599c1ce3c2fbc9d02b901be05',
+    keyId: '286e1c2d622c4c73b5c3d72e4a848abd',
+    key: 'b7fad67599c1ce3c2fbc9d02b901be05',
                 streamUrl: 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_popupppvhd.mpd'
                
                  
@@ -556,7 +568,8 @@ export const channels: Channel[] = [
  id: '60',               name: 'SPOTV 1',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-01-07-908.jpg',
                 drmKey: {
-    keyId: 'ec7ee27d83764e4b845c48cca31c8eef:9c0e4191203fccb0fde34ee29999129e',
+    keyId: 'ec7ee27d83764e4b845c48cca31c8eef',
+    key: '9c0e4191203fccb0fde34ee29999129e',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_spotvhd.mpd'
                
                  
@@ -565,7 +578,8 @@ export const channels: Channel[] = [
  id: '61',               name: 'SPOTV 2',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-12-54-830.jpg',
                 drmKey: {
-    keyId: '7eea72d6075245a99ee3255603d58853:6848ef60575579bf4d415db1032153ed',
+    keyId: '7eea72d6075245a99ee3255603d58853',
+    key: '6848ef60575579bf4d415db1032153ed',
                 streamUrl: 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_spotv2hd.mpd'
                
                  
@@ -574,7 +588,8 @@ export const channels: Channel[] = [
  id: '62',               name: 'PREMIER TENNIS 1',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-13-14-239.jpg',
                 drmKey: {
-    keyId: '59454adb530b4e0784eae62735f9d850:61100d0b8c4dd13e4eb8b4851ba192cc',
+    keyId: '59454adb530b4e0784eae62735f9d850',
+    key: '61100d0b8c4dd13e4eb8b4851ba192cc',
                 streamUrl: 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_premiertennishd.mpd'
                
                  
@@ -583,7 +598,8 @@ export const channels: Channel[] = [
  id: '63',               name: 'PREMIER SPORTS 2',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-13-40-128.jpg',
                 drmKey: {
-    keyId: 'fc19c98cb9504a0fb78b22fea0a4b814:ea683112a96d4ae6c32d4ea13923e8c7',
+    keyId: 'fc19c98cb9504a0fb78b22fea0a4b814',
+    key: 'ea683112a96d4ae6c32d4ea13923e8c7',
                 streamUrl: 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/cg_premiersports_hd1.mpd'
                
                  
@@ -592,7 +608,8 @@ export const channels: Channel[] = [
  id: '64',               name: 'TAP SPORTS',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-14-11-423.jpg',
                 drmKey: {
-    keyId: 'eabd2d95c89e42f2b0b0b40ce4179ea0:0e7e35a07e2c12822316c0dc4873903f',
+    keyId: 'eabd2d95c89e42f2b0b0b40ce4179ea0',
+    key: '0e7e35a07e2c12822316c0dc4873903f',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_tapsports.mpd'
                
                  
@@ -601,7 +618,8 @@ export const channels: Channel[] = [
  id: '65',               name: 'ONE SPORTS+',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-16-27-154.jpg',
                 drmKey: {
-    keyId: '322d06e9326f4753a7ec0908030c13d8:1e3e0ca32d421fbfec86feced0efefda',
+    keyId: '322d06e9326f4753a7ec0908030c13d8',
+    key: '1e3e0ca32d421fbfec86feced0efefda',
                 streamUrl: 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/cg_onesportsplus_hd1.mpd'
                
                  
@@ -610,7 +628,8 @@ export const channels: Channel[] = [
  id: '66',               name: 'ONE SPORTS',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-15-48-580.jpg',
                 drmKey: {
-    keyId: '53c3bf2eba574f639aa21f2d4409ff11:3de28411cf08a64ea935b9578f6d0edd',
+    keyId: '53c3bf2eba574f639aa21f2d4409ff11',
+    key: '3de28411cf08a64ea935b9578f6d0edd',
                 streamUrl: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/cg_onesports_hd.mpd'
                
                  
@@ -619,7 +638,8 @@ export const channels: Channel[] = [
  id: '67',               name: 'PBA RUSH',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-27-45-896.jpg',
                 drmKey: {
-    keyId: '76dc29dd87a244aeab9e8b7c5da1e5f3:95b2f2ffd4e14073620506213b62ac82',
+    keyId: '76dc29dd87a244aeab9e8b7c5da1e5f3',
+    key: '95b2f2ffd4e14073620506213b62ac82',
                 streamUrl: 'https://qp-pldt-live-grp-01-prod.akamaized.net/out/u/cg_pbarush_hd1.mpd'
                
                  
@@ -635,7 +655,8 @@ export const channels: Channel[] = [
  id: '69',               name: 'UAAP',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-28-03-299.jpg',
                 drmKey: {
-    keyId: '95588338ee37423e99358a6d431324b9:6e0f50a12f36599a55073868f814e81e',
+    keyId: '95588338ee37423e99358a6d431324b9',
+    key: '6e0f50a12f36599a55073868f814e81e',
                 streamUrl: 'https://qp-pldt-live-grp-04-prod.akamaized.net/out/u/cg_uaap_cplay_sd.mpd'
                
                  
@@ -644,7 +665,8 @@ export const channels: Channel[] = [
  id: '70',               name: 'CGTN',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-28-23-836.jpg',
                 drmKey: {
-    keyId: '0f854ee4412b11edb8780242ac120002:9f2c82a74e727deadbda389e18798d55',
+    keyId: '0f854ee4412b11edb8780242ac120002',
+    key: '9f2c82a74e727deadbda389e18798d55',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_cgtn.mpd'
                
                  
@@ -653,7 +675,8 @@ export const channels: Channel[] = [
  id: '71',               name: 'FRANCE 24',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-28-43-821.jpg',
                 drmKey: {
-    keyId: '257f9fdeb39d41bdb226c2ae1fbdaeb6:e80ead0f4f9d6038ab34f332713ceaa5',
+    keyId: '257f9fdeb39d41bdb226c2ae1fbdaeb6',
+    key: 'e80ead0f4f9d6038ab34f332713ceaa5',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_france24.mpd'
                
                  
@@ -662,7 +685,8 @@ export const channels: Channel[] = [
  id: '72',               name: 'ABC AUSTRALIA',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-28-57-017.jpg',
                 drmKey: {
-    keyId: '389497f9f8584a57b234e27e430e04b7:3b85594c7f88604adf004e45c03511c0',
+    keyId: '389497f9f8584a57b234e27e430e04b7',
+    key: '3b85594c7f88604adf004e45c03511c0',
                 streamUrl: 'https://qp-pldt-live-grp-10-prod.akamaized.net/out/u/dr_abc_aus.mpd'
                
                  
@@ -671,7 +695,8 @@ export const channels: Channel[] = [
  id: '73',               name: 'TV 5 MONDE',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-29-35-625.jpg',
                 drmKey: {
-    keyId: 'fba5a720b4a541b286552899ba86e38b:f63fa50423148bfcbaa58c91dfcffd0e',
+    keyId: 'fba5a720b4a541b286552899ba86e38b',
+    key: 'f63fa50423148bfcbaa58c91dfcffd0e',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_tv5_monde.mpd'
                
                  
@@ -680,7 +705,8 @@ export const channels: Channel[] = [
  id: '74',               name: 'CHANNEL NEWS ASIA',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-29-51-018.jpg',
                 drmKey: {
-    keyId: 'b259df9987364dd3b778aa5d42cb9acd:753e3dba96ab467e468269e7e33fb813',
+    keyId: 'b259df9987364dd3b778aa5d42cb9acd',
+    key: '753e3dba96ab467e468269e7e33fb813',
                 streamUrl: 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_channelnewsasia.mpd'
                
                  
@@ -689,7 +715,8 @@ export const channels: Channel[] = [
  id: '75',               name: 'LOTUS MACAU',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-30-03-149.jpg',
                 drmKey: {
-    keyId: '60dc692e64ea443a8fb5ac186c865a9b:01bdbe22d59b2a4504b53adc2f606cc1',
+    keyId: '60dc692e64ea443a8fb5ac186c865a9b',
+    key: '01bdbe22d59b2a4504b53adc2f606cc1',
                 streamUrl: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/lotusmacau_prd.mpd'
                
                  
@@ -698,7 +725,8 @@ export const channels: Channel[] = [
  id: '76',               name: 'ANIMAL PLANET',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-30-15-961.jpg',
                 drmKey: {
-    keyId: '436b69f987924fcbbc06d40a69c2799a:c63d5b0d7e52335b61aeba4f6537d54d',
+    keyId: '436b69f987924fcbbc06d40a69c2799a',
+    key: 'c63d5b0d7e52335b61aeba4f6537d54d',
                 streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/cg_animal_planet_sd.mpd'
                
                  
@@ -707,7 +735,8 @@ export const channels: Channel[] = [
  id: '77',               name: 'BBC EARTH',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-50-13-524.jpg',
                 drmKey: {
-    keyId: '34ce95b60c424e169619816c5181aded:0e2a2117d705613542618f58bf26fc8e',
+    keyId: '34ce95b60c424e169619816c5181aded',
+    key: '0e2a2117d705613542618f58bf26fc8e',
                 streamUrl: 'https://qp-pldt-live-grp-03-prod.akamaized.net/out/u/cg_bbcearth_hd1.mpd'
                
                  
@@ -716,7 +745,8 @@ export const channels: Channel[] = [
  id: '78',               name: 'ROCK ENTERTAINMENT',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-50-50-767.jpg',
                 drmKey: {
-    keyId: 'e4ee0cf8ca9746f99af402ca6eed8dc7:be2a096403346bc1d0bb0f812822bb62',
+    keyId: 'e4ee0cf8ca9746f99af402ca6eed8dc7',
+    key: 'be2a096403346bc1d0bb0f812822bb62',
                 streamUrl: 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_rockentertainment.mpd'
                
                  
@@ -725,7 +755,8 @@ export const channels: Channel[] = [
  id: '79',               name: 'DISCOVERY',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-51-08-470.jpg',
                 drmKey: {
-    keyId: 'd9ac48f5131641a789328257e778ad3a:b6e67c37239901980c6e37e0607ceee6',
+    keyId: 'd9ac48f5131641a789328257e778ad3a',
+    key: 'b6e67c37239901980c6e37e0607ceee6',
                 streamUrl: 'https://qp-pldt-live-grp-13-prod.akamaized.net/out/u/dr_discovery.mpd'
                
                  
@@ -734,7 +765,8 @@ export const channels: Channel[] = [
  id: '80',               name: 'BBC WORLD',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-51-54-864.jpg',
                 drmKey: {
-    keyId: '436b69f987924fcbbc06d40a69c2799a:c63d5b0d7e52335b61aeba4f6537d54d',
+    keyId: '436b69f987924fcbbc06d40a69c2799a',
+    key: 'c63d5b0d7e52335b61aeba4f6537d54d',
                 streamUrl: 'https://qp-pldt-live-grp-04-prod.akamaized.net/out/u/bbcworld_news_sd.mpd'
                
                  
@@ -743,7 +775,8 @@ export const channels: Channel[] = [
  id: '81',               name: 'TRAVEL CH',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-52-08-524.jpg',
                 drmKey: {
-    keyId: 'f3047fc13d454dacb6db4207ee79d3d3:bdbd38748f51fc26932e96c9a2020839',
+    keyId: 'f3047fc13d454dacb6db4207ee79d3d3',
+    key: 'bdbd38748f51fc26932e96c9a2020839',
                 streamUrl: 'https://qp-pldt-live-grp-08-prod.akamaized.net/out/u/travel_channel_sd.mpd'
                
                  
@@ -752,7 +785,8 @@ export const channels: Channel[] = [
  id: '82',               name: 'ASIA FOODNETWORK',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-52-28-401.jpg',
                 drmKey: {
-    keyId: '1619db30b9ed42019abb760a0a3b5e7f:5921e47fb290ae263291b851c0b4b6e4',
+    keyId: '1619db30b9ed42019abb760a0a3b5e7f',
+    key: '5921e47fb290ae263291b851c0b4b6e4',
                 streamUrl: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/asianfoodnetwork_sd.mpd'
                
                  
@@ -761,7 +795,8 @@ export const channels: Channel[] = [
  id: '83',               name: 'FOOD NETWORK',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-52-41-676.jpg',
                 drmKey: {
-    keyId: 'b7299ea0af8945479cd2f287ee7d530e:b8ae7679cf18e7261303313b18ba7a14',
+    keyId: 'b7299ea0af8945479cd2f287ee7d530e',
+    key: 'b8ae7679cf18e7261303313b18ba7a14',
                 streamUrl: 'https://qp-pldt-live-grp-09-prod.akamaized.net/out/u/cg_foodnetwork_hd1.mpd'
                
                  
@@ -770,7 +805,8 @@ export const channels: Channel[] = [
  id: '84',               name: 'TAP TV',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-53-08-188.jpg',
                 drmKey: {
-    keyId: 'f6804251e90b4966889b7df94fdc621e:55c3c014f2bd12d6bd62349658f24566',
+    keyId: 'f6804251e90b4966889b7df94fdc621e',
+    key: '55c3c014f2bd12d6bd62349658f24566',
                 streamUrl: 'https://qp-pldt-live-grp-06-prod.akamaized.net/out/u/cg_taptv_sd.mpd'
                
                  
@@ -779,7 +815,8 @@ export const channels: Channel[] = [
  id: '85',               name: 'CRIME INVESTIGATION',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-53-21-111.jpg',
                 drmKey: {
-    keyId: '21e2843b561c4248b8ea487986a16d33:db6bb638ccdfc1ad1a3e98d728486801',
+    keyId: '21e2843b561c4248b8ea487986a16d33',
+    key: 'db6bb638ccdfc1ad1a3e98d728486801',
                 streamUrl: 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_crime_invest.mpd'
                
                  
@@ -788,7 +825,8 @@ export const channels: Channel[] = [
  id: '86',               name: 'TECH STORM',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-53-39-947.jpg',
                 drmKey: {
-    keyId: '5675d85ce6754ba6aa8f6acc4660f76f:140bfb365cf143c349f68699238a610c',
+    keyId: '5675d85ce6754ba6aa8f6acc4660f76f',
+    key: '140bfb365cf143c349f68699238a610c',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_tech_storm.mpd'
                
                  
@@ -797,7 +835,8 @@ export const channels: Channel[] = [
  id: '87',               name: 'FASHION TV',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-53-49-838.jpg',
                 drmKey: {
-    keyId: '971ebbe2d887476398e97c37e0c5c591:472aa631b1e671070a4bf198f43da0c7',
+    keyId: '971ebbe2d887476398e97c37e0c5c591',
+    key: '472aa631b1e671070a4bf198f43da0c7',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_fashiontvhd.mpd'
                
                  
@@ -806,7 +845,8 @@ export const channels: Channel[] = [
  id: '88',               name: 'BLOOMBERG',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-54-02-239.jpg',
                 drmKey: {
-    keyId: 'ef7d9dcfb99b406cb79fb9f675cba426:b24094f6ca136af25600e44df5987af4',
+    keyId: 'ef7d9dcfb99b406cb79fb9f675cba426',
+    key: 'b24094f6ca136af25600e44df5987af4',
                 streamUrl: 'https://qp-pldt-live-grp-09-prod.akamaized.net/out/u/bloomberg_sd.mpd'
                
                  
@@ -815,7 +855,8 @@ export const channels: Channel[] = [
  id: '89',               name: 'NHK JAPAN',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-54-13-052.jpg',
                 drmKey: {
-    keyId: '0f853990412b11edb8780242ac120002:89d57dfef804fd9b5c788a54903d8256',
+    keyId: '0f853990412b11edb8780242ac120002',
+    key: '89d57dfef804fd9b5c788a54903d8256',
                 streamUrl: 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_nhk_japan.mpd'
                
                  
@@ -824,7 +865,8 @@ export const channels: Channel[] = [
  id: '90',               name: 'HISTORY',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-55-04-975.jpg',
                 drmKey: {
-    keyId: 'a7724b7ca2604c33bb2e963a0319968a:6f97e3e2eb2bade626e0281ec01d3675',
+    keyId: 'a7724b7ca2604c33bb2e963a0319968a',
+    key: '6f97e3e2eb2bade626e0281ec01d3675',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_historyhd.mpd'
                
                  
@@ -834,7 +876,8 @@ export const channels: Channel[] = [
  id: '91',               name: 'AL JAZEERA',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-55-39-467.jpg',
                 drmKey: {
-    keyId: '0f85362a412b11edb8780242ac120002:d643dfbbfca6dc64e7f58fd67ea4b7d5',
+    keyId: '0f85362a412b11edb8780242ac120002',
+    key: 'd643dfbbfca6dc64e7f58fd67ea4b7d5',
                 streamUrl: 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_aljazeera.mpd'
                
                  
@@ -843,7 +886,8 @@ export const channels: Channel[] = [
  id: '92',               name: 'CCTV',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-56-08-326.jpg',
                 drmKey: {
-    keyId: '0f8541ec412b11edb8780242ac120002:6cf16c272b7357c48cd47061799a4963',
+    keyId: '0f8541ec412b11edb8780242ac120002',
+    key: '6cf16c272b7357c48cd47061799a4963',
                 streamUrl: 'https://qp-pldt-live-grp-12-prod.akamaized.net/out/u/dr_cctv4.mpd'
                
                  
@@ -852,7 +896,8 @@ export const channels: Channel[] = [
  id: '93',               name: 'LIFETIME',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-57-02-446.jpg',
                 drmKey: {
-    keyId: 'cf861d26e7834166807c324d57df5119:64a81e30f6e5b7547e3516bbf8c647d0',
+    keyId: 'cf861d26e7834166807c324d57df5119',
+    key: '64a81e30f6e5b7547e3516bbf8c647d0',
                 streamUrl: 'https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_lifetime.mpd'
                
                  
@@ -861,7 +906,8 @@ export const channels: Channel[] = [
  id: '94',               name: 'HGTV',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-57-49-199.jpg',
                 drmKey: {
-    keyId: 'f0e3ab943318471abc8b47027f384f5a:13802a79b19cc3485d2257165a7ef62a',
+    keyId: 'f0e3ab943318471abc8b47027f384f5a',
+    key: '13802a79b19cc3485d2257165a7ef62a',
                 streamUrl: 'https://qp-pldt-live-grp-08-prod.akamaized.net/out/u/hgtv_hd1.mpd'
                
                  
@@ -870,7 +916,8 @@ export const channels: Channel[] = [
  id: '95',               name: 'ARIRANG',
                 logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_14-58-02-739.jpg',
                 drmKey: {
-    keyId: '13815d0fa026441ea7662b0c9de00bcf:2d99a55743677c3879a068dd9c92f824',
+    keyId: '13815d0fa026441ea7662b0c9de00bcf',
+    key: '2d99a55743677c3879a068dd9c92f824',
                 streamUrl: 'https://qp-pldt-live-grp-01-prod.akamaized.net/out/u/arirang_sd.mpd'
                
                  
