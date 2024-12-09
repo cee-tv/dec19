@@ -23,8 +23,8 @@ export const channels: Channel[] = [
   },
   {
     id: '2',
-    name: 'KAPAMILYA',
-    logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_11-02-54-579.jpg',
+    name: 'test',
+    logo: '',
     streamUrl: 'https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-kapcha-dash-abscbnono/index.mpd',
     drmKey: {
       keyId: 'bd17afb5dc9648a39be79ee3634dd4b8',
@@ -34,7 +34,7 @@ export const channels: Channel[] = [
   {
     id: '3',
     name: 'GMA PINOY TV',
-    logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_11-02-54-579.jpg',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/GMA_Life_TV_logo.png/640px-GMA_Life_TV_logo.png',
     streamUrl: 'https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-abscbn-gma-x7-dash-abscbnono/7c693236-e0c1-40a3-8bd0-bb25e43f5bfc/index.mpd',
     drmKey: {
       keyId: 'c95ed4c44b0b4f7fa1c6ebbbbaab21a1',
