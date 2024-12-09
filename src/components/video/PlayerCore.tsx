@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
-// Import shaka-player as a namespace instead of a direct import
-import * as shaka from 'shaka-player/dist/shaka-player.ui';
+// Import shaka-player correctly
+import shaka from 'shaka-player';
 
 interface PlayerCoreProps {
   manifestUrl: string;
@@ -32,18 +32,22 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
 
       try {
         if (manifestUrl.includes('.m3u8')) {
-          // HLS Optimization
+          // HLS Optimization for faster playback
           if (Hls.isSupported()) {
             const hls = new Hls({
               enableWorker: true,
               lowLatencyMode: true,
-              backBufferLength: 30,
-              maxBufferSize: 30 * 1000 * 1000, // 30MB
-              maxBufferLength: 30,
+              backBufferLength: 10, // Reduced for faster initial load
+              maxBufferSize: 15 * 1000 * 1000, // 15MB for faster loading
+              maxBufferLength: 15,
               startLevel: -1, // Auto quality selection
-              abrEwmaDefaultEstimate: 500000, // 500kbps initial estimate
+              abrEwmaDefaultEstimate: 1000000, // 1Mbps initial estimate
               abrMaxWithRealBitrate: true,
-              progressive: true // Enable progressive loading
+              progressive: true,
+              testBandwidth: false, // Skip initial bandwidth test
+              fragLoadingTimeOut: 8000, // 8 seconds timeout
+              manifestLoadingTimeOut: 8000,
+              manifestLoadingMaxRetry: 2
             });
             hlsRef.current = hls;
             hls.loadSource(manifestUrl);
@@ -64,27 +68,28 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           await player.attach(videoRef.current);
           playerRef.current = player;
 
-          // Optimize Shaka Player configuration
+          // Optimize Shaka Player configuration for faster playback
           player.configure({
             streaming: {
-              bufferingGoal: 30,
-              rebufferingGoal: 2,
-              bufferBehind: 30,
+              bufferingGoal: 10, // Reduced buffer size for faster start
+              rebufferingGoal: 1, // Start playing sooner after buffering
+              bufferBehind: 15, // Keep less buffer behind
               retryParameters: {
-                maxAttempts: 4,
+                maxAttempts: 2, // Fewer retry attempts
                 baseDelay: 100,
-                backoffFactor: 2,
-                fuzzFactor: 0.5
-              },
-              smallGapLimit: 0.5,
-              jumpLargeGaps: true
+                backoffFactor: 1.5,
+                timeout: 8000 // 8 seconds timeout
+              }
             },
             abr: {
               enabled: true,
-              defaultBandwidthEstimate: 1000000,
-              switchInterval: 8,
-              bandwidthUpgradeTarget: 0.85,
-              bandwidthDowngradeTarget: 0.95
+              defaultBandwidthEstimate: 1000000, // 1Mbps initial estimate
+              switchInterval: 4, // Faster quality switches
+              bandwidthUpgradeTarget: 0.9,
+              bandwidthDowngradeTarget: 0.7,
+              restrictions: {
+                minHeight: 360 // Start with lower quality for faster initial load
+              }
             }
           });
 
