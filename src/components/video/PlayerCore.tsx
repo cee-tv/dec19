@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
-import * as shaka from 'shaka-player';
+// Import shaka-player as a namespace instead of a direct import
+import * as shaka from 'shaka-player/dist/shaka-player.ui';
 
 interface PlayerCoreProps {
   manifestUrl: string;
@@ -19,20 +20,30 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
     const initPlayer = async () => {
       if (!videoRef.current) return;
 
+      // Cleanup previous instances
       if (playerRef.current) {
         await playerRef.current.destroy();
+        playerRef.current = null;
       }
       if (hlsRef.current) {
         hlsRef.current.destroy();
+        hlsRef.current = null;
       }
 
       try {
         if (manifestUrl.includes('.m3u8')) {
+          // HLS Optimization
           if (Hls.isSupported()) {
             const hls = new Hls({
               enableWorker: true,
               lowLatencyMode: true,
-              backBufferLength: 90
+              backBufferLength: 30,
+              maxBufferSize: 30 * 1000 * 1000, // 30MB
+              maxBufferLength: 30,
+              startLevel: -1, // Auto quality selection
+              abrEwmaDefaultEstimate: 500000, // 500kbps initial estimate
+              abrMaxWithRealBitrate: true,
+              progressive: true // Enable progressive loading
             });
             hlsRef.current = hls;
             hls.loadSource(manifestUrl);
@@ -41,6 +52,7 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
             videoRef.current.src = manifestUrl;
           }
         } else {
+          // DASH Optimization
           shaka.polyfill.installAll();
           
           if (!shaka.Player.isBrowserSupported()) {
@@ -52,21 +64,36 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           await player.attach(videoRef.current);
           playerRef.current = player;
 
+          // Optimize Shaka Player configuration
+          player.configure({
+            streaming: {
+              bufferingGoal: 30,
+              rebufferingGoal: 2,
+              bufferBehind: 30,
+              retryParameters: {
+                maxAttempts: 4,
+                baseDelay: 100,
+                backoffFactor: 2,
+                fuzzFactor: 0.5
+              },
+              smallGapLimit: 0.5,
+              jumpLargeGaps: true
+            },
+            abr: {
+              enabled: true,
+              defaultBandwidthEstimate: 1000000,
+              switchInterval: 8,
+              bandwidthUpgradeTarget: 0.85,
+              bandwidthDowngradeTarget: 0.95
+            }
+          });
+
           if (drmKey) {
             player.configure({
               drm: {
                 clearKeys: {
                   [drmKey.keyId]: drmKey.key
                 }
-              },
-              streaming: {
-                bufferingGoal: 30,
-                rebufferingGoal: 15,
-                bufferBehind: 30
-              },
-              abr: {
-                enabled: true,
-                defaultBandwidthEstimate: 1000000
               }
             });
           }
