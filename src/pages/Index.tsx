@@ -72,6 +72,7 @@ const Index = () => {
         <div className="fixed inset-0 z-50 bg-black">
           <VideoPlayer
             manifestUrl={selectedChannel.streamUrl}
+            channelTitle={selectedChannel.name}
             drmKey={selectedChannel.drmKey}
             onClose={() => setSelectedChannel(null)}
             onPrevChannel={handlePrevChannel}

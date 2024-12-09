@@ -1,5 +1,6 @@
 export interface VideoPlayerProps {
   manifestUrl: string;
+  channelTitle: string;
   drmKey?: {
     keyId: string;
     key: string;
@@ -15,6 +16,7 @@ export interface VideoControlsProps {
   volume: number;
   isMuted: boolean;
   showControls: boolean;
+  channelTitle: string;
   onPlayPause: () => void;
   onFullscreenToggle: () => void;
   onVolumeChange: (value: number[]) => void;

@@ -4,7 +4,7 @@ import PlayerCore from './video/PlayerCore';
 import type { VideoPlayerProps } from './video/VideoPlayerTypes';
 import { Loader2 } from 'lucide-react';
 
-const VideoPlayer = ({ manifestUrl, drmKey, onClose, onPrevChannel, onNextChannel }: VideoPlayerProps) => {
+const VideoPlayer = ({ manifestUrl, channelTitle, drmKey, onClose, onPrevChannel, onNextChannel }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -127,6 +127,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose, onPrevChannel, onNextChanne
         volume={volume}
         isMuted={isMuted}
         showControls={showControls}
+        channelTitle={channelTitle}
         onPlayPause={togglePlay}
         onFullscreenToggle={toggleFullscreen}
         onVolumeChange={handleVolumeChange}

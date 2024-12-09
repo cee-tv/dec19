@@ -10,6 +10,7 @@ const VideoControls = ({
   volume,
   isMuted,
   showControls,
+  channelTitle,
   onPlayPause,
   onFullscreenToggle,
   onVolumeChange,
@@ -20,19 +21,30 @@ const VideoControls = ({
 }: VideoControlsProps) => {
   return (
     <>
-      {/* Close button at top right */}
-      <Button
-        variant="ghost"
-        size="icon"
+      {/* Top bar with close button and channel title */}
+      <div
         className={cn(
-          "absolute top-4 right-4 text-white hover:bg-white/20 z-50",
+          "absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/50 to-transparent",
+          "flex items-center justify-between",
           "transition-opacity duration-300",
           showControls ? "opacity-100" : "opacity-0"
         )}
-        onClick={onClose}
       >
-        <X className="h-6 w-6" />
-      </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-white hover:bg-white/20 rounded-full"
+          onClick={onClose}
+        >
+          <X className="h-6 w-6" />
+        </Button>
+        
+        <h2 className="text-white text-xl font-semibold">
+          {channelTitle}
+        </h2>
+        
+        <div className="w-10" /> {/* Spacer to center the title */}
+      </div>
 
       {/* Bottom controls */}
       <div
