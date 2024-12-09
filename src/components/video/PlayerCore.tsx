@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 // Import shaka-player correctly
-import * as shaka from 'shaka-player';
+import shaka from 'shaka-player/dist/shaka-player.compiled';
 
 interface PlayerCoreProps {
   manifestUrl: string;
@@ -37,23 +37,29 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
             const hls = new Hls({
               enableWorker: true,
               lowLatencyMode: true,
-              backBufferLength: 10, // Reduced for faster initial load
-              maxBufferSize: 15 * 1000 * 1000, // 15MB for faster loading
+              backBufferLength: 10,
+              maxBufferSize: 15 * 1000 * 1000,
               maxBufferLength: 15,
-              startLevel: -1, // Auto quality selection
-              abrEwmaDefaultEstimate: 1000000, // 1Mbps initial estimate
+              startLevel: -1,
+              abrEwmaDefaultEstimate: 1000000,
               abrMaxWithRealBitrate: true,
               progressive: true,
-              testBandwidth: false, // Skip initial bandwidth test
-              fragLoadingTimeOut: 8000, // 8 seconds timeout
+              testBandwidth: false,
+              fragLoadingTimeOut: 8000,
               manifestLoadingTimeOut: 8000,
               manifestLoadingMaxRetry: 2
             });
             hlsRef.current = hls;
             hls.loadSource(manifestUrl);
             hls.attachMedia(videoRef.current);
+            
+            // Start playing as soon as possible
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              videoRef.current?.play();
+            });
           } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = manifestUrl;
+            videoRef.current.play();
           }
         } else {
           // DASH Optimization
@@ -68,27 +74,26 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           await player.attach(videoRef.current);
           playerRef.current = player;
 
-          // Optimize Shaka Player configuration for faster playback
           player.configure({
             streaming: {
-              bufferingGoal: 10, // Reduced buffer size for faster start
-              rebufferingGoal: 1, // Start playing sooner after buffering
-              bufferBehind: 15, // Keep less buffer behind
+              bufferingGoal: 10,
+              rebufferingGoal: 1,
+              bufferBehind: 15,
               retryParameters: {
-                maxAttempts: 2, // Fewer retry attempts
+                maxAttempts: 2,
                 baseDelay: 100,
                 backoffFactor: 1.5,
-                timeout: 8000 // 8 seconds timeout
+                timeout: 8000
               }
             },
             abr: {
               enabled: true,
-              defaultBandwidthEstimate: 1000000, // 1Mbps initial estimate
-              switchInterval: 4, // Faster quality switches
+              defaultBandwidthEstimate: 1000000,
+              switchInterval: 4,
               bandwidthUpgradeTarget: 0.9,
               bandwidthDowngradeTarget: 0.7,
               restrictions: {
-                minHeight: 360 // Start with lower quality for faster initial load
+                minHeight: 360
               }
             }
           });
@@ -104,6 +109,8 @@ const PlayerCore = ({ manifestUrl, drmKey, videoRef }: PlayerCoreProps) => {
           }
 
           await player.load(manifestUrl);
+          // Start playing immediately after loading
+          videoRef.current.play();
         }
       } catch (error) {
         console.error('Error loading video:', error);
