@@ -19,6 +19,22 @@ const Index = () => {
     setSelectedChannel(channel);
   };
 
+  const handlePrevChannel = () => {
+    if (!selectedChannel) return;
+    const currentIndex = channels.findIndex(c => c.id === selectedChannel.id);
+    if (currentIndex > 0) {
+      setSelectedChannel(channels[currentIndex - 1]);
+    }
+  };
+
+  const handleNextChannel = () => {
+    if (!selectedChannel) return;
+    const currentIndex = channels.findIndex(c => c.id === selectedChannel.id);
+    if (currentIndex < channels.length - 1) {
+      setSelectedChannel(channels[currentIndex + 1]);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 space-y-6">
@@ -58,6 +74,8 @@ const Index = () => {
             manifestUrl={selectedChannel.streamUrl}
             drmKey={selectedChannel.drmKey}
             onClose={() => setSelectedChannel(null)}
+            onPrevChannel={handlePrevChannel}
+            onNextChannel={handleNextChannel}
           />
         </div>
       )}

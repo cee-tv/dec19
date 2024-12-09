@@ -1,4 +1,4 @@
-import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX, X } from 'lucide-react';
+import { Maximize2, Minimize2, Play, Pause, Volume2, VolumeX, X, SkipBack, SkipForward } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Slider } from '../ui/slider';
 import { cn } from '@/lib/utils';
@@ -14,7 +14,9 @@ const VideoControls = ({
   onFullscreenToggle,
   onVolumeChange,
   onMuteToggle,
-  onClose
+  onClose,
+  onPrevChannel,
+  onNextChannel
 }: VideoControlsProps) => {
   return (
     <>
@@ -41,6 +43,18 @@ const VideoControls = ({
         )}
       >
         <div className="flex items-center gap-4">
+          {/* Previous Channel Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-white hover:bg-white/20 rounded-full"
+            onClick={onPrevChannel}
+            disabled={!onPrevChannel}
+          >
+            <SkipBack className="h-6 w-6" />
+          </Button>
+
+          {/* Play/Pause Button */}
           <Button
             variant="ghost"
             size="icon"
@@ -52,6 +66,17 @@ const VideoControls = ({
             ) : (
               <Play className="h-8 w-8 ml-1" />
             )}
+          </Button>
+
+          {/* Next Channel Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-white hover:bg-white/20 rounded-full"
+            onClick={onNextChannel}
+            disabled={!onNextChannel}
+          >
+            <SkipForward className="h-6 w-6" />
           </Button>
 
           <div className="flex items-center gap-2">

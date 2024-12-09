@@ -4,15 +4,15 @@ import PlayerCore from './video/PlayerCore';
 import type { VideoPlayerProps } from './video/VideoPlayerTypes';
 import { Loader2 } from 'lucide-react';
 
-const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
+const VideoPlayer = ({ manifestUrl, drmKey, onClose, onPrevChannel, onNextChannel }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true); // Set to true for autoplay
+  const [isPlaying, setIsPlaying] = useState(true);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [isBuffering, setIsBuffering] = useState(true); // Start with buffering true
+  const [isBuffering, setIsBuffering] = useState(true);
 
   const toggleFullscreen = () => {
     if (!containerRef.current) return;
@@ -79,7 +79,7 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
       video.addEventListener('playing', () => setIsBuffering(false));
       video.addEventListener('canplay', () => {
         setIsBuffering(false);
-        video.play(); // Autoplay when ready
+        video.play();
       });
     }
 
@@ -132,6 +132,8 @@ const VideoPlayer = ({ manifestUrl, drmKey, onClose }: VideoPlayerProps) => {
         onVolumeChange={handleVolumeChange}
         onMuteToggle={toggleMute}
         onClose={onClose}
+        onPrevChannel={onPrevChannel}
+        onNextChannel={onNextChannel}
       />
     </div>
   );

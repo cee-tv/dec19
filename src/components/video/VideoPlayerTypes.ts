@@ -5,6 +5,8 @@ export interface VideoPlayerProps {
     key: string;
   };
   onClose?: () => void;
+  onPrevChannel?: () => void;
+  onNextChannel?: () => void;
 }
 
 export interface VideoControlsProps {
@@ -18,4 +20,6 @@ export interface VideoControlsProps {
   onVolumeChange: (value: number[]) => void;
   onMuteToggle: () => void;
   onClose?: () => void;
+  onPrevChannel?: () => void;
+  onNextChannel?: () => void;
 }
