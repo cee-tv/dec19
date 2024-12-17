@@ -44,7 +44,7 @@ export const channels: Channel[] = [
   {
     id: '4',
     name: 'A2Z',
-    logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_11-02-54-579.jpg',
+    logo: 'https://i.imgur.com/1uGuvAP_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
     streamUrl: 'https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/cg_a2z.mpd',
     drmKey: {
       keyId: 'f703e4c8ec9041eeb5028ab4248fa094',
@@ -54,7 +54,7 @@ export const channels: Channel[] = [
   {
     id: '5',
     name: 'ONE PH',
-    logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_11-03-14-258.jpg',
+    logo: 'https://i.imgur.com/dzlIj6g_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
     streamUrl: 'https://qp-pldt-live-grp-04-prod.akamaized.net/out/u/oneph_sd.mpd',
     drmKey: {
       keyId: '92834ab4a7e1499b90886c5d49220e46',
@@ -64,7 +64,7 @@ export const channels: Channel[] = [
   {
     id: '6',
     name: 'ONE NEWS',
-    logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_11-11-32-021.jpg',
+    logo: 'https://i.imgur.com/vFY1GRk_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
     streamUrl: 'https://qp-pldt-live-grp-04-prod.akamaized.net/out/u/onenews_hd1.mpd',
     drmKey: {
       keyId: 'd39eb201ae494a0b98583df4d110e8dd',
@@ -74,7 +74,7 @@ export const channels: Channel[] = [
   {
     id: '7',
     name: 'iBC',
-    logo: 'https://raw.githubusercontent.com/Raulabdul666/Drmpicture/refs/heads/main/Picsart_24-10-17_11-05-39-936.jpg',
+    logo: 'https://i.imgur.com/vFY1GRk_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
     streamUrl: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/ibc13_sd.mpd',
     drmKey: {
       keyId: '04e292bc99bd4ccba89e778651914254',
