@@ -74,7 +74,7 @@ export const channels: Channel[] = [
   {
     id: '7',
     name: 'iBC',
-    logo: 'https://i.imgur.com/vFY1GRk_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
+    logo: 'https://i.imgur.com/E7ghLz2_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
     streamUrl: 'https://qp-pldt-live-grp-07-prod.akamaized.net/out/u/ibc13_sd.mpd',
     drmKey: {
       keyId: '04e292bc99bd4ccba89e778651914254',
