@@ -24,7 +24,7 @@ export const channels: Channel[] = [
   {
     id: '2',
     name: 'test',
-    logo: '',
+    logo: 'https://i.imgur.com/vFY1GRk_d.jpeg?maxwidth=520&shape=thumb&fidelity=high',
     streamUrl: 'https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01006-abs-cbn-kapcha-dash-abscbnono/index.mpd',
     drmKey: {
       keyId: 'bd17afb5dc9648a39be79ee3634dd4b8',
